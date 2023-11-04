@@ -452,7 +452,7 @@ function About(props) {
             </div> */}
 
 
-            {/* self card start - shubham*/}
+            {/* self card start - shubham pathak*/}
             <div className="col col-lg-5 col-md-12 col-sm-12 col-xs-12 mt-5 teacherBox" >        {/* for the whole card */}
 
               <div className="row">
