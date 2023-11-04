@@ -8,7 +8,8 @@ import "react-dropdown/style.css";
 import Swal from "sweetalert2";
 import "react-toastify/dist/ReactToastify.css";
 import md5 from "md5";
-import { ArrowLeft, Eye, EyeOff, Briefcase, Dribbble } from "react-feather";
+import { Eye, EyeOff, Briefcase, Dribbble } from "react-feather";     //check {ArrowLeft is removed}
+import ArrowLeft from "../ArrowLeft";
 import userImage from "../../assets/user4.png";
 
 let randomUser = userImage;
@@ -197,12 +198,13 @@ const RegistrationDetails = ({ goBack, setLogin, userType, setUserType }) => {
           marginRight:"30px"
         }}
         >
-      <ArrowLeft
+      {/* <ArrowLeft                       //check
         size={25}
         color="#545454"
         onClick={() => goBack()}
         style={{ cursor: "pointer" }}
-      />
+      /> */}
+      <ArrowLeft />                      {/* updated */}
       <div
         style={{
           float:"right",
@@ -267,7 +269,7 @@ const RegistrationDetails = ({ goBack, setLogin, userType, setUserType }) => {
           </p>
         </div>
       </div>
-      <p
+      {/* <p                             //check
         style={{
           fontFamily: "Poppins",
           fontSize: 16,
@@ -279,7 +281,7 @@ const RegistrationDetails = ({ goBack, setLogin, userType, setUserType }) => {
         }}
       >
         Are you a student or a teacher/instructor ?
-      </p>
+      </p> */}
       <div
         style={{
           width: "100%",
@@ -312,7 +314,7 @@ const RegistrationDetails = ({ goBack, setLogin, userType, setUserType }) => {
             />
             <span class="checkmark"></span>
           </label>
-          <label
+          {/* <label                                   //check
             class="checkbox-container"
             style={{ borderColor: !isStudent ? "#6C63FF" : "#eee" }}
           >
@@ -327,7 +329,7 @@ const RegistrationDetails = ({ goBack, setLogin, userType, setUserType }) => {
               checked={!isStudent}
             />
             <span class="checkmark"></span>
-          </label>
+          </label> */}
         </div>
         </div>
         <p
@@ -538,7 +540,8 @@ const RegistrationDetails = ({ goBack, setLogin, userType, setUserType }) => {
         }}
       >
         <button
-          onClick={userType === "student" ? registerStudent : registerTeacher}
+          // onClick={userType === "student" ? registerStudent : registerTeacher}       /* check */
+          onClick={registerStudent}         /* updated check */
           className="btn btn-new"
         >
           <p
