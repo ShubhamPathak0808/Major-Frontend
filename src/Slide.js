@@ -46,7 +46,7 @@ itemClass="carousel-item-padding-40-px"
 centerMode={true}
       >
 
- 
+
             {this.props.array.map(book=>{
                  const name_top=book.name,author_top=book.author;
                  return(<div className="slider-image" style={{width:'200px',height:'200px',marginRight:'20px'}} ><div className="name-slide">{name_top}</div><div className="author-slide">By-{author_top}</div></div>)

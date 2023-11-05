@@ -7,6 +7,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import LandingPage from "./components/LandingPage/LandingPage";
 import Sidebar from "./components/Sidebar";
 import Home from "./components/Home";
+import Hodhome from "./components/hod/Hodhome";
 import Notes from "./components/Notes";
 import Search from "./components/Search";
 import Course from "./components/Course";
@@ -90,7 +91,9 @@ function App() {
         <Route exact path='/' component={HeaderPage}/>
         <Route exact path='/getStarted' component={LandingPage}/>
        <Route exact path="/reset-password/*" component={ResetPassword} />
-      <Route exact path="/home" render={()=><><Home/> <Sidebar/></>}/>
+       <Route exact path="/home" render={() => (
+          userType === "hod" ? <><Hodhome /><Sidebar /></> : <><Home /><Sidebar /></>
+      )}/>
       <Route path="/notes" render={()=><><Notes /><Sidebar /></>}exact/>
       {/* <Route exact path="/books" component={Application}/> */}
       {/* <Route path='/books' render={()=><><Application/><Sidebar/></>}/> */}
@@ -107,20 +110,20 @@ function App() {
       {/* <Route path="/extra" render={Extra}/> */}
       <Route path="/lp" render={LandPage}/>
       <Route path="/timer" render={()=><QuizTimer duration={7200} onTimeUp={handleTimeUp}/>}/>
-      </Switch> 
+      </Switch>
     </BrowserRouter>
   </div>
   )
-  // let width = window.innerWidth 
-  // let height = window.innerHeight 
+  // let width = window.innerWidth
+  // let height = window.innerHeight
   // return (
-    
+
   //   <div>
   //     {/* <Home/> */}
   //     <LandingPage/>
   //     {/* Hello there */}
   //     <Scrollbars
-    
+
   //   style={{ width, height, backgroundColor: "transparent" }}
   //   autoHide
   //   autoHideDuration={1000}
@@ -141,7 +144,7 @@ function App() {
   //   )}
   // >
   //   <BrowserRouter>
-      
+
   //    <Switch>
   //     {/* <div>Hello How are you</div> */}
   //     {/* <Route path="/" component={LandingPage} /> */}

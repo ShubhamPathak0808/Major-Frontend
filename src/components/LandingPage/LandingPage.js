@@ -30,6 +30,14 @@ const LandingPage = () => {
     _id: "",
   });
 
+  const [hodDetails, setHodDetails] = React.useState({
+    fname: "",
+    lname: "",
+    email: "",
+    password: "",
+    _id: "",
+  });
+
   return (
     <div
       style={{
@@ -63,7 +71,7 @@ const LandingPage = () => {
           {/* <BookOpen size={35} color="#6C63FF" /> */}
         </div>
         <img
-        
+
           src={registerPic}
           style={{ width: "100%", alignSelf: "center", zIndex: 999 }}
         />
@@ -92,6 +100,8 @@ const LandingPage = () => {
               studentDetails={studentDetails}
               setTeacherDetails={setTeacherDetails}
               teacherDetails={teacherDetails}
+              setHodDetails={setHodDetails}
+              hodDetails={hodDetails}
               goBack={() => setShowForm(false)}
               setLogin={() => setIsLogin(false)}
             />

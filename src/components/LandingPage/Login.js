@@ -25,11 +25,15 @@ const Login = ({
   setStudentDetails,
   teacherDetails,
   setTeacherDetails,
+  hodDetails,
+  setHodDetails
 }) => {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [viewPassword, setViewPassword] = React.useState(true);
   const [isStudent, setIsStudent] = React.useState(true);
+  const [isTeacher, setIsTeacher] = React.useState(false);
+  const [isHod, setIsHod] = React.useState(false);
   const [forgotPassword, setForgotPassword] = React.useState(false);
 
   const onChangeEmail = (e) => setEmail(e.target.value);
@@ -80,7 +84,7 @@ const Login = ({
 
     Axios.post("http://localhost:8000/api/getResetLink", {
       email: email,
-      user_type: isStudent ? "student" : "teacher",
+      user_type: isStudent ? "student" : isTeacher ? "teacher" : "hod",
     })
       .then((res) => {
         if (res.data.success) {
@@ -93,7 +97,7 @@ const Login = ({
           }, 2000);
         } else if (!res.data.data) {
           Swal.fire("Error", "Oops! Something went wrong");
-        } 
+        }
       })
       .catch((error) => {
       });
@@ -128,10 +132,39 @@ const Login = ({
       });
   };
 
+  const loginHod = () => {
+    if (!validateEmail() || !validatePassword()) {
+      return Swal.fire("Error", "Form is invalid");
+    }
+
+    Axios.post("http://localhost:8000/api/hod/login", {
+      email: email,
+      password:(password),
+    })
+      .then((res) => {
+        if (res.data.data) {
+          const details = res.data.data;
+          setHodDetails(details);
+          Swal.fire({ text: "Logging in", icon: "success" });
+          setTimeout(() => {
+            localStorage.setItem("userDetails", JSON.stringify(details));
+            localStorage.setItem("userType", JSON.stringify("hod"));
+            window.location.href = "/home";
+          }, 1000);
+        } else if (!res.data.data) {
+          Swal.fire({ text: "Email or password is incorrect", icon: "error" });
+        } else
+          Swal.fire({ text: "Email or password is incorrect", icon: "error" });
+      })
+      .catch(() => {
+        Swal.fire({ text: "Email or password is incorrect", icon: "error" });
+      });
+  };
+
   return (
     <React.Fragment>
       {forgotPassword ? (
-         <div 
+         <div
          style={{
            padding: "30px",
            backgroundColor: "white",
@@ -148,7 +181,7 @@ const Login = ({
             onClick={() => goBack()}
             style={{ cursor: "pointer", position: "absolute" }}
           />
-          <div style={{display:"flex", flexDirection:"column",justifyContent:"center",alignItems:"center"}}> 
+          <div style={{display:"flex", flexDirection:"column",justifyContent:"center",alignItems:"center"}}>
             <div
             style={{
               width: "auto",
@@ -213,7 +246,7 @@ const Login = ({
               marginTop: 30,
             }}
           >
-            Are you a student or teacher/instructor?
+            Are you a student or teacher/HOD?
           </p>
           <div
             style={{
@@ -246,6 +279,8 @@ const Login = ({
                   onClick={() => {
                     setIsStudent(true);
                     setUserType("student");
+                    setIsTeacher(false);
+                    setIsHod(false);
                   }}
                   checked={isStudent}
                 />
@@ -253,7 +288,7 @@ const Login = ({
               </label>
               <label
                 class="checkbox-container"
-                style={{ borderColor: !isStudent ? "#6C63FF" : "#eee" }}
+                style={{ borderColor: isTeacher ? "#6C63FF" : "#eee" }}
               >
                 <Briefcase
                   size={22}
@@ -264,10 +299,34 @@ const Login = ({
                 <input
                   type="checkbox"
                   onClick={() => {
+                    setIsTeacher(true);
                     setIsStudent(false);
+                    setIsHod(false);
                     setUserType("teacher");
                   }}
-                  checked={!isStudent}
+                  checked={isTeacher}
+                />
+                <span class="checkmark"></span>
+              </label>
+              <label
+                class="checkbox-container"
+                style={{ borderColor: isHod ? "#6C63FF" : "#eee" }}
+              >
+                <Briefcase
+                  size={22}
+                  style={{ marginRight: 15 }}
+                  color="#545454"
+                />
+                HOD
+                <input
+                  type="checkbox"
+                  onClick={() => {
+                    setIsHod(true);
+                    setIsTeacher(false);
+                    setIsStudent(false);
+                    setUserType("hod");
+                  }}
+                  checked={isHod}
                 />
                 <span class="checkmark"></span>
               </label>
@@ -343,7 +402,7 @@ const Login = ({
           <br />
         </div>
       ) : (
-        <div 
+        <div
         style={{
           padding: "30px",
           backgroundColor: "white",
@@ -373,7 +432,7 @@ const Login = ({
           >
             New here ? Register now
           </div>
-            <div style={{display:"flex", flexDirection:"column",justifyContent:"center",alignItems:"center"}}> 
+            <div style={{display:"flex", flexDirection:"column",justifyContent:"center",alignItems:"center"}}>
             <div
             style={{
               width: "auto",
@@ -438,7 +497,7 @@ const Login = ({
               marginTop: 30,
             }}
           >
-            Log in as a student or a teacher/instructor ?
+            Log in as a student or a teacher/hod ?
           </p>
             <div
               style={{
@@ -463,6 +522,8 @@ const Login = ({
                   onClick={() => {
                     setIsStudent(true);
                     setUserType("student");
+                    setIsHod(false);
+                    setIsTeacher(false);
                   }}
                   checked={isStudent}
                 />
@@ -470,7 +531,7 @@ const Login = ({
               </label>
               <label
                 class="checkbox-container"
-                style={{ borderColor: !isStudent ? "#6C63FF" : "#eee" }}
+                style={{ borderColor: isTeacher ? "#6C63FF" : "#eee" }}
               >
                 <Briefcase
                   size={22}
@@ -482,9 +543,33 @@ const Login = ({
                   type="checkbox"
                   onClick={() => {
                     setIsStudent(false);
+                    setIsTeacher(true);
+                    setIsHod(false);
                     setUserType("teacher");
                   }}
-                  checked={!isStudent}
+                  checked={isTeacher}
+                />
+                <span class="checkmark"></span>
+              </label>
+              <label
+                class="checkbox-container"
+                style={{ borderColor: isHod ? "#6C63FF" : "#eee" }}
+              >
+                <Briefcase
+                  size={22}
+                  style={{ marginRight: 15 }}
+                  color="#545454"
+                />
+                HOD
+                <input
+                  type="checkbox"
+                  onClick={() => {
+                    setIsHod(true);
+                    setIsTeacher(false);
+                    setIsStudent(false);
+                    setUserType("hod");
+                  }}
+                  checked={isHod}
                 />
                 <span class="checkmark"></span>
               </label>
@@ -568,7 +653,7 @@ const Login = ({
               </div>
             </div>
               <button style={{width:"10vw",marginTop:"80px"}}
-              onClick={userType === "student" ? loginStudent : loginTeacher}
+              onClick={userType === "student" ? loginStudent : userType === "teacher" ? loginTeacher : loginHod}
               className="btn btn-new"
             >
               <p
@@ -587,7 +672,7 @@ const Login = ({
               </p>
             </button>
           </div>
-                  
+
           <br />
           <div
             style={{

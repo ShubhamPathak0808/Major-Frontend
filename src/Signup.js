@@ -48,6 +48,9 @@ class Signup extends Component {
               if(d.role==='user'){
                 window.location.href = `/student`;
               }
+              else if(d.role === 'supAdmin'){
+                window.location.href = `/hod`;
+              }
               else{
                 window.location.href = `/teacher`;
               }
@@ -68,15 +71,16 @@ class Signup extends Component {
               <div><input style={{ width: '100%', borderRadius: 2, border: 0, height: '2.2rem', marginTop: 2, backgroundColor: 'rgb(225, 240, 255)', fontSize: '1.2vw' }} onChange={this.nameChange} type="text" id="name" name="name" /></div></div>
               <div style={{ width: '100%', textAlign: 'left', fontSize: '1.2rem', marginTop: '2px' }}><label for="email">Email</label>
               <div><input style={{ width: '100%', borderRadius: 2, border: 0, height: '2.2rem', marginTop: 2, backgroundColor: 'rgb(225, 240, 255)', fontSize: '1.2vw' }} onChange={this.emailChange} type="text" id="email" name="email" /></div></div>
-            
+
             <div style={{ width: '100%', textAlign: 'left', fontSize: '1.2rem', marginTop: '2px' }}><label for="password">Password</label>
               <div><input style={{ width: '100%', borderRadius: 2, border: 0, height: '2.2rem', marginTop: 2, backgroundColor: 'rgb(225, 240, 255)', fontSize: '1.2vw' }}onChange={this.passwordChange} type="password" id="password" name="password" /></div></div>
               <div style={{ width: '100%', textAlign: 'left', fontSize: '1.2rem', marginTop: '2px' }}><label for="role">Role</label>
              <div> <select onChange={this.roleChange}  name="role" id="role" style={{width:'100%',height:'2.3rem',backgroundColor: 'rgb(225, 240, 255)'}}>
                <option value="user">User</option>
                <option value="admin">Admin</option>
+               <option value="supAdmin">supAdmin</option>
                 </select></div></div>
-            
+
              <input type="submit" value="SignUp" onClick={this.enter} style={{
               backgroundColor: '#007bff',
               color:"white",
