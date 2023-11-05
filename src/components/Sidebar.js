@@ -701,6 +701,7 @@ const Sidebar = () => {
               </p>
             </div>
             {sidebarData.map((item, index) => {
+              {/* console.log( "id is : " + item._id); */}
               return (
                 <Link to={`/course/${item._id}`}>
                   <div

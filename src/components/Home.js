@@ -40,12 +40,15 @@ const MyCourses = () => {
   const forceUpdate = React.useCallback(() => update((v) => v + 1), []);
 
   React.useEffect(() => {
+    //user
     Axios.get(`http://localhost:8000/api/${userType}/${_id}`, {
       header: {
         "Content-Type": "application/json; charset=utf-8",
       },
     })
       .then((res) => {
+        // console.log("shubham");
+        // console.log(res);
         if (res.data.success) {
           setUserInfo(res.data.data);
         } else {
@@ -54,13 +57,16 @@ const MyCourses = () => {
       .catch((error) => {
         console.log(error);
       });
-
+    
+    //courses
     Axios.get(`http://localhost:8000/api/fetchCourse/${userType}/${_id}`, {
       header: {
         "Content-Type": "application/json; charset=utf-8",
       },
     })
       .then((res) => {
+        // console.log("shubham");
+        // console.log(res);
         if (res.data.success) {
           setCourses(res.data.data);
         } else {
