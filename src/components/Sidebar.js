@@ -84,7 +84,7 @@ const Sidebar = () => {
   }, [modalIsOpen]);
 
   React.useEffect(() => {
-    if (userType === "teacher") return;
+    if (userType === "teacher" || userType == "hod") return;
     Axios.get(`http://localhost:8000/api/fetchCourse/student/${user._id}`, {
       header: {
         "Content-Type": "application/json; charset=utf-8",
@@ -103,7 +103,7 @@ const Sidebar = () => {
   }, [modalIsOpen]);
 
   React.useEffect(() => {
-    if (userType === "student") return;
+    if (userType === "student" || userType == "hod") return;
     Axios.get(`http://localhost:8000/api/fetchCourse/teacher/${user._id}`, {
       header: {
         "Content-Type": "application/json; charset=utf-8",
@@ -204,7 +204,7 @@ const Sidebar = () => {
       // url: "https://saumya25mis.github.io/Circuit-Simulator-main/"
     },
   ];
-  if (userType === "teacher") {
+  if (userType === "teacher" || userType === "hod") {
     menuOptions.push({
       title: "Search",
       icon: (
@@ -331,7 +331,7 @@ const Sidebar = () => {
                 padding: 0,
               }}
             >
-              {userType[0].toUpperCase() + userType.slice(1, userType.length)}
+              {userType === "hod" ? userType.toUpperCase : userType[0].toUpperCase() + userType.slice(1, userType.length)}
             </p>
           </div>
         </div>
@@ -596,7 +596,7 @@ const Sidebar = () => {
             })}
 
               <div onClick={()=>{window.location.href=" https://saumya25mis.github.io/Circuit-Simulator-main/"}} style={{color:"black",marginLeft:"20px",cursor:"pointer"}}>Simulator</div>
-             {/* <Link to="/books"><div style={{color:"black",marginLeft:"20px",cursor:"pointer"}}>	
+             {/* <Link to="/books"><div style={{color:"black",marginLeft:"20px",cursor:"pointer"}}>
 <i class="fa fa-lightbulb-o"></i>E-Library Manager</div></Link> */}
             <div
               style={{
@@ -671,16 +671,17 @@ const Sidebar = () => {
                 Switch to {isLightTheme ? "dark" : "light"} theme now
               </p>
             </div>
-
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                alignItems: "center",
-                width: "100%",
-                paddingLeft: 30,
-                paddingRight: 20,
-                justifyContent: "space-between",
+            {
+              userType === "hod" ? null : (
+               <div
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  alignItems: "center",
+                  width: "100%",
+                  paddingLeft: 30,
+                  paddingRight: 20,
+                  justifyContent: "space-between",
               }}
             >
               <p
@@ -700,6 +701,7 @@ const Sidebar = () => {
                 MY COURSES
               </p>
             </div>
+            )}
             {sidebarData.map((item, index) => {
               {/* console.log( "id is : " + item._id); */}
               return (
@@ -1133,7 +1135,7 @@ const Sidebar = () => {
               </p>
             </div>
           </React.Fragment>
-        ) : (
+        ) : userType === "teacher" ? (
           <React.Fragment>
             <div
               style={{
@@ -1174,7 +1176,36 @@ const Sidebar = () => {
               </p>
             </div>
           </React.Fragment>
-        )}
+        ) : (
+          <React.Fragment>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                alignItems: "center",
+                marginTop: 12,
+                justifyContent: "center",
+              }}
+            >
+              <p
+                style={{
+                  fontFamily: "Poppins",
+                  fontSize: 14,
+                  fontWeight: 500,
+                  margin: 30,
+                  padding: 0,
+                  marginRight: 10,
+                  letterSpacing: 0.7,
+                  verticalAlign: "middle",
+                  marginTop: 20,
+                  color: "#6C63FF",
+                }}
+              >
+                Head of department Electronics and Instrumentation Engineering
+              </p>
+            </div>
+          </React.Fragment>
+          )}
         <Link to="/">
          <p
             style={{

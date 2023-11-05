@@ -24,7 +24,7 @@ class Login extends Component {
     enter(e){
       e.preventDefault();
       var data={
-     
+
         email:this.state.email_id,
         password:this.state.password,
       }
@@ -39,6 +39,9 @@ class Login extends Component {
           if(d.role==='user'){
             window.location.href = `/student`;
           }
+          else if(d.role === 'supAdmin'){
+            window.location.href = `/hod`;
+          }
           else{
             window.location.href = `/teacher`;
           }
@@ -46,7 +49,7 @@ class Login extends Component {
          else{
            alert(res.data)
          }
-  
+
         })
       }
     render(){

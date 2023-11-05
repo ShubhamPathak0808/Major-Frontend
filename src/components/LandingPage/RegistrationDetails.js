@@ -56,6 +56,8 @@ const RegistrationDetails = ({ goBack, setLogin, userType, setUserType }) => {
   const [studentDepartment, setStudentDepartment] = React.useState(
     departmentOptions[0].value
   );
+  const [isTeacher, setIsTeacher] = React.useState(userType === "teacher");
+  const [isHod, setIsHod] = React.useState(userType === "hod");
   const [isStudent, setIsStudent] = React.useState(userType === "student");
 
   const onChangefName = (e) => setfName(e.target.value);
@@ -185,9 +187,62 @@ const RegistrationDetails = ({ goBack, setLogin, userType, setUserType }) => {
       });
   };
 
+
+  const registerHod = () => {
+    if (
+      !validateEmail() ||
+      !validateLName() ||
+      !validateFName() ||
+      !validatePassword()
+    ) {
+      return toast.error(
+        "Invalid form. Please ensure you have filled all fields."
+      );
+      }
+
+    Axios.post("http://localhost:8000/api/hod", {
+      fName,
+      lName,
+      email,
+      password:password,
+    })
+      .then((res) => {
+        if (res.status === 200 && res.data.success) {
+          Axios.post("http://localhost:8000/api/hod/login", {
+            email: email,
+            password: password,
+          }).then((res) => {
+            if (res.data.data) {
+              const details = res.data.data;
+              Swal.fire({
+                icon: "success",
+                text: "Registration successful! Logging in...",
+              });
+              setTimeout(() => {
+                localStorage.setItem("userDetails", JSON.stringify(details));
+                localStorage.setItem("userType", JSON.stringify("hod"));
+                window.location.href = "/home";
+              }, 2000);
+            }
+          });
+        } else if (res.data.success === false) {
+          if (res.data.reason === "Email already exists") {
+            toast.error("Account with this Email already exists");
+          } else {
+            toast.error("Error");
+          }
+        } else {
+          toast.error("Error");
+        }
+      })
+      .catch((err) => {
+        toast.error("Error");
+      });
+  };
+
   return (
     <React.Fragment>
-      <div 
+      <div
         style={{
           padding: "30px",
           backgroundColor: "white",
@@ -218,7 +273,7 @@ const RegistrationDetails = ({ goBack, setLogin, userType, setUserType }) => {
       >
         Already have an account ? Login now
       </div>
-      <div style={{display:"flex", flexDirection:"column",justifyContent:"center",alignItems:"center"}}> 
+      <div style={{display:"flex", flexDirection:"column",justifyContent:"center",alignItems:"center"}}>
       <div
         style={{
           width: "auto",
@@ -309,6 +364,8 @@ const RegistrationDetails = ({ goBack, setLogin, userType, setUserType }) => {
               onClick={() => {
                 setIsStudent(true);
                 setUserType("student");
+                setIsTeacher(false);
+                setIsHod(false);
               }}
               checked={isStudent}
             />

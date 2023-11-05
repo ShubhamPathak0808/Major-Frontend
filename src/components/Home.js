@@ -21,7 +21,7 @@ let user = localdata
     };
 let { _id, year, department } = user;
 
-const titleCase = (str) => {
+export const titleCase = (str) => {
   var splitStr = str.toLowerCase().split(" ");
   for (var i = 0; i < splitStr.length; i++) {
     splitStr[i] =
@@ -52,12 +52,13 @@ const MyCourses = () => {
         if (res.data.success) {
           setUserInfo(res.data.data);
         } else {
+          // TODO
         }
       })
       .catch((error) => {
         console.log(error);
       });
-    
+
     //courses
     Axios.get(`http://localhost:8000/api/fetchCourse/${userType}/${_id}`, {
       header: {
