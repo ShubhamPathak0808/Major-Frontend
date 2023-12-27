@@ -29,6 +29,95 @@ let user = localdata
 			_id: "404",
 	  };
 
+export const generateExcelTotal = (attendences, courseStudents) => {
+	const workbook = new exceljs.Workbook();
+	const worksheet = workbook.addWorksheet("Attendance");
+
+	courseStudents.sort((a, b) => {
+		const nameA = (a.fName + a.lName).toUpperCase();
+		const nameB = (b.fName + b.lName).toUpperCase();
+		if (nameA < nameB) {
+		  return -1;
+		}
+		if (nameA > nameB) {
+		  return 1;
+		}
+
+		// names must be equal
+		return 0;
+	});
+
+	worksheet.addRow(["Name"]);
+
+	courseStudents.forEach((ticket) => {
+		let name = ticket.fName + " " + ticket.lName;
+		worksheet.addRow([name]);
+	});
+
+	attendences.reverse();
+
+	const fetchData = async (itemId) => {
+		try {
+		  const response = await Axios.get(`http://localhost:8000/api/attendenceResult/${itemId}`);
+		  if (response.data.success) {
+			const result = response.data.data;
+			return result;
+		  } else {
+			throw new Error('API request unsuccessful');
+		  }
+		} catch (error) {
+		  console.error(`Error fetching data for ${itemId}:`, error);
+		  return null;
+		}
+	};
+
+	const fetchAllData = async () => {
+		for (const item of attendences) {
+		  const AttendanceResults = await fetchData(item._id);
+		  if (AttendanceResults) {
+			const newColumnHeader = item.createdAt.substr(0, 10);
+			let newColumnValues = [];
+
+			courseStudents.forEach((ticket) => {
+				let name = ticket.fName + " " + ticket.lName;
+				if (AttendanceResults.some(person => person.student_name === name))
+					newColumnValues.push('Present');
+				else
+					newColumnValues.push('Absent');
+			});
+
+			worksheet.getColumn(worksheet.columnCount + 1).header = newColumnHeader;
+
+			// Add the values to the new column
+			newColumnValues.forEach((value, index) => {
+  				worksheet.getCell(index + 2, worksheet.columnCount).value = value;
+			});
+		  }
+		}
+	};
+
+	fetchAllData().then(() => {
+			worksheet.getColumn(1).width = 20;
+			worksheet.getColumn(2).width = 10;
+
+			// Generate the Excel file
+			workbook.xlsx.writeBuffer().then((buffer) => {
+			// Convert the buffer to a Blob
+			const blob = new Blob([buffer], {
+				type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+			});
+
+			// Create a download link
+			const downloadLink = document.createElement("a");
+			downloadLink.href = window.URL.createObjectURL(blob);
+			downloadLink.download = "attendance.xlsx";
+			downloadLink.click();
+
+			toast.success("Attendance data downloaded successfully.");
+		});
+	});
+};
+
 const generateExcel = (tickets) => {
 	//updated part
 	const workbook = new exceljs.Workbook();
@@ -308,7 +397,7 @@ const Attendence = ({ history }) => {
 					width: 60,
 					height: 60,
 					boxShadow: "1px 1px 5px #ababab",
-					display: userType === "teacher" ? "flex" : "none",
+					display: userType === "teacher" || userType === "hod" ? "flex" : "none",
 				}}
 				onClick={() =>
 					generateExcel(attendenceResults ? attendenceResults : [])
@@ -396,7 +485,7 @@ const Attendence = ({ history }) => {
 						)}
 					</div>
 				</React.Fragment>
-			) : (
+			) : userType === "student" ? (
 				<React.Fragment>
 					{/* <div
                   style={{
@@ -460,7 +549,7 @@ const Attendence = ({ history }) => {
 						<QrScanner />
 					)}
 				</React.Fragment>
-			)}
+			) : null}
 		</div>
 	);
 };

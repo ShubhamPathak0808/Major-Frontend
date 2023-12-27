@@ -35,6 +35,7 @@ import userImage from "../assets/user.png";
 import userImage3 from "../assets/user3.png";
 import userImage4 from "../assets/user4.png";
 import { getRandomUser } from "./random";
+import { generateExcelTotal } from "./Attendence";
 import "react-day-picker/lib/style.css";
 import "./css/Course.css";
 import { Input } from "@material-ui/core";
@@ -996,6 +997,44 @@ const Course = () => {
 							)}
 						</div>
 						<div style={Object.assign({}, styles.slide, styles.slide2)}>
+						{userType === "teacher" || userType === "hod" ? (
+								<React.Fragment>
+									<div
+										style={{
+											display: "flex",
+											flexDirection: "row",
+											fontFamily: "Poppins",
+											height: "40px",
+											alignItems: "center",
+											marginBottom: 20,
+										}}
+									>
+										<p
+											className="sub"
+											style={{
+												fontSize: 20,
+												color: "#232323",
+												fontWeight: 600,
+												textAlign: "left",
+												paddingTop: 5,
+												marginBottom: 15,
+												marginRight: 0,
+											}}
+										>
+											<div style={{ color: 'red' }}>
+												Download Complete Attendance{" "}
+											</div>
+										</p>
+										<button
+											onClick={() => generateExcelTotal(attendences, courseStudents)}
+											className={"settings-icon changeColorBG"}
+											style={{ padding: 0 }}
+										>
+											<Download size={22} color="#6C63FF" />
+										</button>
+									</div>
+								</React.Fragment>
+							) : null}
 							{attendences.length ? (
 								attendences.map((item, index) => {
 									return (
@@ -1008,6 +1047,7 @@ const Course = () => {
 										/>
 									);
 								})
+
 							) : (
 								<EmptyStateSmall
 									title="No Attendence Scheduled"
@@ -1017,7 +1057,7 @@ const Course = () => {
 						</div>
 
 						<div style={Object.assign({}, styles.slide, styles.slide3)}>
-							{userType === "teacher" ? (
+							{userType === "teacher" || userType === "hod" ? (
 								<React.Fragment>
 									<div
 										style={{
