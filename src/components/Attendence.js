@@ -29,67 +29,156 @@ let user = localdata
 			_id: "404",
 	  };
 
-const generateExcel = (tickets) => {
+export const generateExcelTotal = (attendences, courseStudents) => {
+	const workbook = new exceljs.Workbook();
+	const worksheet = workbook.addWorksheet("Attendance");
+
+	courseStudents.sort((a, b) => {
+		const nameA = (a.fName + a.lName).toUpperCase();
+		const nameB = (b.fName + b.lName).toUpperCase();
+		if (nameA < nameB) {
+		  return -1;
+		}
+		if (nameA > nameB) {
+		  return 1;
+		}
+
+		// names must be equal
+		return 0;
+	});
+
+	worksheet.addRow(["Name"]);
+
+	courseStudents.forEach((ticket) => {
+		let name = ticket.fName + " " + ticket.lName;
+		worksheet.addRow([name]);
+	});
+
+	attendences.reverse();
+
+	let promises = [];
+
+	for (const item of attendences) {
+		promises.push(Axios.get(`http://localhost:8000/api/attendenceResult/${item._id}`));
+	}
+
+	Promise.allSettled(promises).then((values) => {
+		let ind = 0;
+		for (const AttendanceResults of values) {
+			if (AttendanceResults.status === "rejected")
+				continue;
+			const newColumnHeader = attendences[ind].createdAt.substr(0, 10);
+			ind++;
+			let newColumnValues = [];
+			courseStudents.forEach((ticket) => {
+				let name = ticket.fName + " " + ticket.lName;
+				if (AttendanceResults.value.data.data.some(person => person.student_name === name))
+					newColumnValues.push('Present');
+				else
+					newColumnValues.push('Absent');
+			});
+
+			worksheet.getColumn(worksheet.columnCount + 1).header = newColumnHeader;
+
+			// Add the values to the new column
+			newColumnValues.forEach((value, index) => {
+  				worksheet.getCell(index + 2, worksheet.columnCount).value = value;
+			});
+		}
+
+		worksheet.getColumn(1).width = 20;
+		worksheet.getColumn(2).width = 10;
+
+		// Generate the Excel file
+		workbook.xlsx.writeBuffer().then((buffer) => {
+			// Convert the buffer to a Blob
+			const blob = new Blob([buffer], {
+				type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+			});
+
+			// Create a download link
+			const downloadLink = document.createElement("a");
+			downloadLink.href = window.URL.createObjectURL(blob);
+			downloadLink.download = "attendance.xlsx";
+			downloadLink.click();
+
+			toast.success("Attendance data downloaded successfully.");
+		});
+	});
+};
+
+const generateExcel = (attendenceResults, courseID) => {
 	//updated part
 	const workbook = new exceljs.Workbook();
 	const worksheet = workbook.addWorksheet("Attendance");
-	// const headerRow = worksheet.addRow(["Name", "Marked"]);
-	// const headerRow = worksheet.addRow([
-	// 	"Name",
-	// 	`${tickets[0].date.substr(0, 10)}`,
-	// ]);
 
-	const headerRow = worksheet.addRow([
-		"Name",
-		`${tickets.length > 0 ? tickets[0].date.substr(0, 10) : ""}`,
-	  ]);
+	Axios.get(`http://localhost:8000/api/course/students/${courseID}`)
+		.then((res) => {
+				if (res.data.success) {
+					let courseStudents = res.data.data;
+					courseStudents.sort((a, b) => {
+						const nameA = (a.fName + a.lName).toUpperCase();
+						const nameB = (b.fName + b.lName).toUpperCase();
+						if (nameA < nameB) {
+						  return -1;
+						}
+						if (nameA > nameB) {
+						  return 1;
+						}
 
-	if (!tickets.length) return;
+						// names must be equal
+						return 0;
+					});
 
-	// console.log(tickets);
+					const headerRow = worksheet.addRow([
+						"Name",
+						`${attendenceResults.length > 0 ? attendenceResults[0].date.substr(0, 10) : ""}`,
+					  ]);
 
-	// fetch data of students in enrolled course;
-	// const URL_hit_for_couse_std =  `http://localhost:8000/std/${course_id}`
-	// axios.get(URL_hit_for_couse_std)
+					console.log(courseStudents);
 
-	tickets.forEach((ticket) => {
-		const rowData = [ticket.student_name, "Present"];
-		worksheet.addRow(rowData);
-	});
+					courseStudents.forEach((param) => {
+						let name = param.fName + " " + param.lName;
+						worksheet.addRow([name]);
+					});
 
-	// Set the column widths for better readability
-	worksheet.getColumn(1).width = 20;
-	worksheet.getColumn(2).width = 10;
+					let newColumnValues = [];
 
-	// const sortedTickets = tickets.sort((a, b) => {
-	//   // Sort based on the student_name (first column, index 0)
-	//   const nameA = a.student_name.toUpperCase();
-	//   const nameB = b.student_name.toUpperCase();
-	//   if (nameA < nameB) return -1;
-	//   if (nameA > nameB) return 1;
-	//   return 0;
-	// });
+					courseStudents.forEach((ticket) => {
+						let name = ticket.fName + " " + ticket.lName;
+						if (attendenceResults.some(person => person.student_name === name))
+							newColumnValues.push('Present');
+						else
+							newColumnValues.push('Absent');
+					});
 
-	// sortedTickets.forEach((ticket) => {
-	//   const rowData = [ticket.student_name, "Present"];
-	//   worksheet.addRow(rowData);
-	// });
+					// Add the values to the new column
+					newColumnValues.forEach((value, index) => {
+						  worksheet.getCell(index + 2, worksheet.columnCount).value = value;
+					});
 
-	// Generate the Excel file
-	workbook.xlsx.writeBuffer().then((buffer) => {
-		// Convert the buffer to a Blob
-		const blob = new Blob([buffer], {
-			type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-		});
+					// Set the column widths for better readability
+					worksheet.getColumn(1).width = 20;
+					worksheet.getColumn(2).width = 10;
 
-		// Create a download link
-		const downloadLink = document.createElement("a");
-		downloadLink.href = window.URL.createObjectURL(blob);
-		downloadLink.download = "attendance.xlsx";
-		downloadLink.click();
+					// Generate the Excel file
+					workbook.xlsx.writeBuffer().then((buffer) => {
+						// Convert the buffer to a Blob
+						const blob = new Blob([buffer], {
+							type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+						});
 
-		toast.success("Attendance data downloaded successfully.");
-	});
+						// Create a download link
+						const downloadLink = document.createElement("a");
+						downloadLink.href = window.URL.createObjectURL(blob);
+						downloadLink.download = "attendance.xlsx";
+						downloadLink.click();
+
+						toast.success("Attendance data downloaded successfully.");
+					});
+				}
+			})
+		.catch(() => {});
 };
 
 // const generatePDF = (tickets) => {                           //check for generating pdf function
@@ -132,11 +221,12 @@ const Attendence = ({ history }) => {
 
 	const { isActive, setIsActive } = useContext(ActiveContext); //updated part
 	setIsActive(attendenceInfo ? attendenceInfo.is_active : false); //updated part
-
 	const [attendenceResults, setAttendenceResults] = React.useState([]);
+	const [courseStudents, setCourseStudents] = useState([]);
 	const [hasSubmitted, setHasSubmitted] = React.useState(false);
 	const forceUpdate = React.useCallback(() => setIgnore((v) => v + 1), []);
 	const [ignore, setIgnore] = React.useState(0);
+	const [courseID, setcourseID] = React.useState(0);
 
 	const { qr, setqr } = useContext(qrContext);
 	const qr_url = `http://localhost:3000/attendence/${qr}`; //new part added
@@ -177,6 +267,7 @@ const Attendence = ({ history }) => {
 				if (res.data.success) {
 					setattendenceInfo(res.data.data);
 					setIsActive(res.data.data.is_active);
+					setcourseID(res.data.data.course_id);
 				}
 			}
 		);
@@ -308,10 +399,10 @@ const Attendence = ({ history }) => {
 					width: 60,
 					height: 60,
 					boxShadow: "1px 1px 5px #ababab",
-					display: userType === "teacher" ? "flex" : "none",
+					display: userType === "teacher" || userType === "hod" ? "flex" : "none",
 				}}
 				onClick={() =>
-					generateExcel(attendenceResults ? attendenceResults : [])
+					generateExcel(attendenceResults ? attendenceResults : [], courseID)
 				}
 			>
 				<Download size={30} color="white" />
@@ -396,7 +487,7 @@ const Attendence = ({ history }) => {
 						)}
 					</div>
 				</React.Fragment>
-			) : (
+			) : userType === "student" ? (
 				<React.Fragment>
 					{/* <div
                   style={{
@@ -460,7 +551,7 @@ const Attendence = ({ history }) => {
 						<QrScanner />
 					)}
 				</React.Fragment>
-			)}
+			) : null}
 		</div>
 	);
 };

@@ -19,6 +19,7 @@ import {
   Layout,
   Search,
   RotateCcw,
+  Activity
 } from "react-feather";
 import { getRandomUser } from "./random";
 import { customStyles, customStyles2 } from "./CustomModalStyles";
@@ -43,13 +44,13 @@ const Sidebar = () => {
     a
       ? JSON.parse(a)
       : {
-          department: "",
-          year: "",
-          fName: "",
-          lName: "",
-          email: "",
-          _id: "",
-        }
+        department: "",
+        year: "",
+        fName: "",
+        lName: "",
+        email: "",
+        _id: "",
+      }
   );
   const [sidebar, setSidebar] = useState(false);
   const [isLightTheme, setIsLightTheme] = useState(true);
@@ -161,8 +162,8 @@ const Sidebar = () => {
             GetCurrentPath() === "/home"
               ? "#6C63FF"
               : theme === "dark"
-              ? "#BABABA"
-              : "#232323"
+                ? "#BABABA"
+                : "#232323"
           }
         />
       ),
@@ -177,8 +178,8 @@ const Sidebar = () => {
             GetCurrentPath() === "/notes"
               ? "#6C63FF"
               : theme === "dark"
-              ? "#BABABA"
-              : "#232323"
+                ? "#BABABA"
+                : "#232323"
           }
           style={{ marginRight: 22 }}
         />
@@ -189,18 +190,36 @@ const Sidebar = () => {
       title: "E-Library",
       icon: (
         <BookOpen
-        size={20}
-        color={
-          GetCurrentPath() === "/books"
-            ? "#6C63FF"
-            : theme === "dark"
-            ? "#BABABA"
-            : "#232323"
-        }
-        style={{ marginRight: 22 }}
-      />
+          size={20}
+          color={
+            GetCurrentPath() === "/books"
+              ? "#6C63FF"
+              : theme === "dark"
+                ? "#BABABA"
+                : "#232323"
+          }
+          style={{ marginRight: 22 }}
+        />
       ),
       path: "/books",
+      // url: "https://saumya25mis.github.io/Circuit-Simulator-main/"
+    },
+    {
+      title: "Analog Simulator",
+      icon: (
+        <Activity
+          size={20}
+          color={
+            GetCurrentPath() === "/notes"
+              ? "#6C63FF"
+              : theme === "dark"
+                ? "#BABABA"
+                : "#232323"
+          }
+          style={{ marginRight: 22 }}
+        />
+      ),
+      path: "/AnalogSimulator",
       // url: "https://saumya25mis.github.io/Circuit-Simulator-main/"
     },
   ];
@@ -214,8 +233,8 @@ const Sidebar = () => {
             GetCurrentPath() === "/search"
               ? "#6C63FF"
               : theme === "dark"
-              ? "#BABABA"
-              : "#232323"
+                ? "#BABABA"
+                : "#232323"
           }
         />
       ),
@@ -375,15 +394,17 @@ const Sidebar = () => {
                   justifyContent: "center",
                   height: 80,
                   paddingRight: 30,
+                  // display:"inline"
                 }}
               >
                 {/* <BookOpen size={30} color="#6C63FF" /> */}
-                <img className="logoimg" src={logo}/>
+                <img className="logoimg" src={logo} />
                 <div
                   style={{
                     alignItems: "flex-start",
                     display: "flex",
                     justifyContent: "space-between",
+                    // display:"inline"
                   }}
                 >
                   <p
@@ -399,9 +420,14 @@ const Sidebar = () => {
                   >
                     SGSITS
                   </p>
+
                 </div>
               </div>
             </Link>
+            {/* <div><h3>V</h3></div> */}
+
+
+
 
             <br
               style={{
@@ -565,8 +591,8 @@ const Sidebar = () => {
                           GetCurrentPath() === item.path
                             ? "#6C63FF"
                             : theme === "dark"
-                            ? "#BABABA"
-                            : "#232323",
+                              ? "#BABABA"
+                              : "#232323",
                         fontSize: 17,
                         letterSpacing: 0.4,
                         fontWeight: 500,
@@ -581,8 +607,8 @@ const Sidebar = () => {
                           GetCurrentPath() === item.path
                             ? "#6C63FF"
                             : theme === "dark"
-                            ? "#BABABA"
-                            : "#232323",
+                              ? "#BABABA"
+                              : "#232323",
                         fontSize: 17,
                         letterSpacing: 0.4,
                         fontWeight: 500,
@@ -595,8 +621,13 @@ const Sidebar = () => {
               );
             })}
 
-              <div onClick={()=>{window.location.href=" https://saumya25mis.github.io/Circuit-Simulator-main/"}} style={{color:"black",marginLeft:"20px",cursor:"pointer"}}>Simulator</div>
-             {/* <Link to="/books"><div style={{color:"black",marginLeft:"20px",cursor:"pointer"}}>
+            <div onClick={() => { window.location.href = " https://saumya25mis.github.io/Circuit-Simulator-main/" }} style={{ color: "black", marginLeft: "20px", cursor: "pointer" }}>
+              Simulator
+            </div>
+            <div>
+              Analog Simulator
+            </div> 
+            {/* <Link to="/books"><div style={{color:"black",marginLeft:"20px",cursor:"pointer"}}>
 <i class="fa fa-lightbulb-o"></i>E-Library Manager</div></Link> */}
             <div
               style={{
@@ -673,37 +704,37 @@ const Sidebar = () => {
             </div>
             {
               userType === "hod" ? null : (
-               <div
-                style={{
-                  display: "flex",
-                  flexDirection: "row",
-                  alignItems: "center",
-                  width: "100%",
-                  paddingLeft: 30,
-                  paddingRight: 20,
-                  justifyContent: "space-between",
-              }}
-            >
-              <p
-                className="sub"
-                style={{
-                  fontFamily: "Poppins",
-                  fontWeight: 500,
-                  color: theme === "dark" ? "#878787" : "#434343",
-                  fontSize: 15,
-                  textAlign: "left",
-                  letterSpacing: 0.3,
-                  margin: "10px 0",
-                  marginTop: 18,
-                  padding: 0,
-                }}
-              >
-                MY COURSES
-              </p>
-            </div>
-            )}
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    alignItems: "center",
+                    width: "100%",
+                    paddingLeft: 30,
+                    paddingRight: 20,
+                    justifyContent: "space-between",
+                  }}
+                >
+                  <p
+                    className="sub"
+                    style={{
+                      fontFamily: "Poppins",
+                      fontWeight: 500,
+                      color: theme === "dark" ? "#878787" : "#434343",
+                      fontSize: 15,
+                      textAlign: "left",
+                      letterSpacing: 0.3,
+                      margin: "10px 0",
+                      marginTop: 18,
+                      padding: 0,
+                    }}
+                  >
+                    MY COURSES
+                  </p>
+                </div>
+              )}
             {sidebarData.map((item, index) => {
-              {/* console.log( "id is : " + item._id); */}
+              {/* console.log( "id is : " + item._id); */ }
               return (
                 <Link to={`/course/${item._id}`}>
                   <div
@@ -718,8 +749,8 @@ const Sidebar = () => {
                           GetCurrentPath() === `/course/${item._id}`
                             ? "#6C63FF"
                             : theme === "dark"
-                            ? "#BABABA"
-                            : "#232323",
+                              ? "#BABABA"
+                              : "#232323",
                         fontWeight: 500,
                         letterSpacing: 0.3,
                         fontSize: 16,
@@ -854,7 +885,7 @@ const Sidebar = () => {
           Change Last Name
         </p>
         <input
-        className="changeColor changeColorBG"
+          className="changeColor changeColorBG"
           type="text"
           style={{ height: 40 }}
           value={newLName}
@@ -1205,9 +1236,9 @@ const Sidebar = () => {
               </p>
             </div>
           </React.Fragment>
-          )}
+        )}
         <Link to="/">
-         <p
+          <p
             style={{
               fontSize: 16,
               color: "#6C63FF",

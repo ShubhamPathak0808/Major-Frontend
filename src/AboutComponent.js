@@ -5,7 +5,7 @@ import "./AboutComponent.css";
 //material ui for responsive - Shubham
 // import {Grid} from "@mui/material"
 
-import hod from "./assets/ppbansod.jpg";
+import hod from "./assets/khatrisir.jpg";
 import dkmishrasir from "./assets/hodsir.jpg";
 // import dk from './assets/dkmishra.jpg'
 
@@ -101,22 +101,22 @@ function About(props) {
         {/* cards of teachers start */}
 
 
-        <div className="col-12 col-md-5" style={{"margin": "20px 0 0 0"}}>
+        <div className="col-12 col-md-5" style={{"margin": "20px 0 0 0", textAlign:"center"}}>
           <Card >
             <CardHeader className="bg-new text-white text-center">
               <b>Head of the Department</b>
             </CardHeader>
-            <CardImg className="hod" src={hod} />
+            <CardImg className="hod" src={hod} style ={{margin:"0 auto 0 auto"}}/>
             <CardBody className="buddy">
               <dl className="row p-1">
                 <dt className="col-12">
-                  <i class="fa fa-user"></i>:<a href="https://www.sgsits.ac.in/files/downloads/DKMishra.pdf"><b> Dr. P. P. Bansod</b></a>
+                  <i class="fa fa-user"></i>:<a href="https://www.sgsits.ac.in/files/downloads/DKMishra.pdf"><b> Mr. Rajesh Khatri</b></a>
                 </dt>
                 <dt className="col-12">
-                  <i class="fa fa-envelope"></i>:<a href="mailto:pbansod@sgsits.ac.in"> pbansod@sgsits.ac.in</a>
+                  <i class="fa fa-envelope"></i>:<a href="mailto:pbansod@sgsits.ac.in"> rajeshkhatri1@rediffmail.com</a>
                 </dt>
                 <dt className="col-12">
-                  <i class="fa fa-phone"></i>:<a href="tel:091-731-2582421"> 091-731-2582421</a>
+                  <i class="fa fa-phone"></i>:<a href="tel:091-731-2582421"> 091-731-2582425</a>
                 </dt>
               </dl>
             </CardBody>
@@ -201,7 +201,8 @@ function About(props) {
 
 
             {/* self card start - shubham Pathak*/}
-            <div className="col col-lg-5 col-md-12 col-sm-12 col-xs-12 mt-5 teacherBox" >        {/* for the whole card */}
+            {/* for the whole card */}
+            {/* <div className="col col-lg-5 col-md-12 col-sm-12 col-xs-12 mt-5 teacherBox" >        
 
               <div className="row">
                 <div className="col-lg-4 col-md-4 col-sm-12 col-xs-12" style={{ "textAlign": "center" }}>
@@ -226,7 +227,7 @@ function About(props) {
                 </div>
               </div>
 
-            </div>
+            </div> */}
             {/* self card end */}
 
 
@@ -435,7 +436,7 @@ function About(props) {
             {/* self card start - shubham*/}
             <div className="col col-lg-5 col-md-12 col-sm-12 col-xs-12 mt-5 teacherBox" >        {/* for the whole card */}
 
-              <div className="row">
+              <div className="row" >
                 <div className="col-lg-4 col-md-4 col-sm-12 col-xs-12" style={{ "textAlign": "center" }}>
                   <a href="https://www.sgsits.ac.in/files/downloads/RajeshKhatri.pdf">
                     <Media
@@ -489,9 +490,9 @@ function About(props) {
 
 
             {/* self card start - shubham*/}
-            <div className="col col-lg-5 col-md-12 col-sm-12 col-xs-12 mt-5 teacherBox" >        {/* for the whole card */}
+            <div className="col col-lg-5 col-md-12 col-sm-12 col-xs-12 mt-5 teacherBox mg" >        {/* for the whole card */}
 
-              <div className="row">
+              <div className="row mg">
                 <div className="col-lg-4 col-md-4 col-sm-12 col-xs-12" style={{ "textAlign": "center" }}>
                   <a href="https://www.sgsits.ac.in/files/downloads/RCGurjar.pdf">
                     <Media
@@ -607,7 +608,8 @@ function About(props) {
 
 
             {/* self card start - shubham*/}
-            <div className="col col-lg-5 col-md-12 col-sm-12 col-xs-12 mt-5 teacherBox" >        {/* for the whole card */}
+            {/* for the whole card */}
+            {/* <div className="col col-lg-5 col-md-12 col-sm-12 col-xs-12 mt-5 teacherBox" >        
 
               <div className="row">
                 <div className="col-lg-4 col-md-4 col-sm-12 col-xs-12" style={{ "textAlign": "center" }}>
@@ -628,12 +630,12 @@ function About(props) {
                   <p>Date of joining:  28/06/2018</p>
                   <p><i class="fa fa-phone"></i> : <a href="tel: 091-731-2582429"> 091-731-2582429</a></p>
                   <p><i class="fa fa-envelope"></i> : <a href="mailto:nehabakawale@gmail.com">nehabakawale@gmail.com</a></p>
-                  {/* <p>: <a href="mailto:gsoni[at]sgsits.ac.in">gsoni[at]sgsits.ac.in</a></p> */}
+                  
                   <p></p>
                 </div>
               </div>
 
-            </div>
+            </div> */}
             {/* self card end */}
 
 

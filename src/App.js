@@ -15,6 +15,7 @@ import Contact from './ContactComponent';
 import Main from './MainPage.js';
 import About from './AboutComponent.js';
 import Assignment from './AssignmentComponent';
+import AnalogSimulator from './components/AnalogSimulator.js';
 function App() {
   return (
     <div className="App">
@@ -31,6 +32,7 @@ function App() {
         <Route exact path="/login"><Login/></Route>
         <Route exact path="/aboutus" component={About}/>
         <Route exact path='/assignment' component={Assignment}/>
+        <Route exact path='/AnalogSimulator' component={AnalogSimulator}/>
         <Route exact path='/contactus'  />
       </Switch>
       <Footer/>

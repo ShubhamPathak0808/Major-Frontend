@@ -11,6 +11,7 @@ import md5 from "md5";
 import { Eye, EyeOff, Briefcase, Dribbble } from "react-feather";     //check {ArrowLeft is removed}
 import ArrowLeft from "../ArrowLeft";
 import userImage from "../../assets/user4.png";
+import "./strong.css";
 
 let randomUser = userImage;
 
@@ -97,7 +98,7 @@ const RegistrationDetails = ({ goBack, setLogin, userType, setUserType }) => {
       fName,
       lName,
       email,
-      password:password,
+      password: password,
       year: studentClass,
       department: studentDepartment,
     })
@@ -151,7 +152,7 @@ const RegistrationDetails = ({ goBack, setLogin, userType, setUserType }) => {
       fName,
       lName,
       email,
-      password:password,
+      password: password,
     })
       .then((res) => {
         if (res.status === 200 && res.data.success) {
@@ -198,13 +199,13 @@ const RegistrationDetails = ({ goBack, setLogin, userType, setUserType }) => {
       return toast.error(
         "Invalid form. Please ensure you have filled all fields."
       );
-      }
+    }
 
     Axios.post("http://localhost:8000/api/hod", {
       fName,
       lName,
       email,
-      password:password,
+      password: password,
     })
       .then((res) => {
         if (res.status === 200 && res.data.success) {
@@ -248,83 +249,84 @@ const RegistrationDetails = ({ goBack, setLogin, userType, setUserType }) => {
           backgroundColor: "white",
           borderRadius: "10px",
           boxShadow: "0px 0px 5px 5px rgba(0, 0, 0, .2)",
-          height:"630px",
-          marginTop:"7px",
-          marginRight:"30px"
+          // height: "630px",
+          marginTop: "7px",
+          // marginRight: "30px"
         }}
-        >
-      {/* <ArrowLeft                       //check
+      >
+        {/* <ArrowLeft                       //check
         size={25}
         color="#545454"
         onClick={() => goBack()}
         style={{ cursor: "pointer" }}
       /> */}
-      <ArrowLeft />                      {/* updated */}
-      <div
-        style={{
-          float:"right",
-          fontFamily: "Poppins",
-          fontSize: 16,
-          color: "#6C63FF",
-          fontWeight: 600,
-          cursor: "pointer",
-        }}
-        onClick={() => setLogin()}
-      >
-        Already have an account ? Login now
-      </div>
-      <div style={{display:"flex", flexDirection:"column",justifyContent:"center",alignItems:"center"}}>
-      <div
-        style={{
-          width: "auto",
+        <ArrowLeft />                      {/* updated */}
+        <div
+          style={{
+            float: "right",
+            fontFamily: "Poppins",
+            fontSize: 16,
+            color: "#6C63FF",
+            fontWeight: 600,
+            cursor: "pointer",
+          }}
+          onClick={() => setLogin()}
+        >
+          Already have an account ? Login now
+        </div>
+        <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", border: "2px solid black", padding: "10px" }}>
+          <div
+            style={{
+              width: "auto",
               display: "flex",
               flexDirection: "row",
-              justifyContent:"center",
+              justifyContent: "center",
               alignItems: "center",
               paddingTop: "5%",
               marginTop: 10,
-        }}
-      >
-        <div
-          style={{
-            width: "4rem",
-            height: "4rem",
-            borderRadius: "5rem",
-            backgroundColor: "#eeeeee",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            overflow: "hidden",
-          }}
-        >
-          <img src={randomUser} style={{ width: "3.5rem", marginTop: 10 }} />
-        </div>
-        <div style={{ marginLeft: "1rem" }}>
-          <h2
-            style={{
-              textAlign: "left",
-              fontFamily: "Poppins",
-              color: "#545454",
-              fontWeight: 600,
-              fontSize: 26,
             }}
           >
-            Welcome
-          </h2>
-          <p
-            style={{
-              fontFamily: "Mulish",
-              fontSize: 17,
-              color: "#ababab",
-              fontWeight: 600,
-              margin: 0,
-            }}
-          >
-            Enter few more details to get started
-          </p>
-        </div>
-      </div>
-      {/* <p                             //check
+            <div
+              style={{
+                width: "4rem",
+                height: "4rem",
+                borderRadius: "5rem",
+                backgroundColor: "#eeeeee",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                overflow: "hidden",
+              }}
+            >
+              <img src={randomUser} style={{ width: "3.5rem", marginTop: 10 }} />
+            </div>
+
+            <div style={{ marginLeft: "1rem", padding: "20px" }}>
+              <h2
+                style={{
+                  textAlign: "left",
+                  fontFamily: "Poppins",
+                  color: "#545454",
+                  fontWeight: 600,
+                  fontSize: 26,
+                }}
+              >
+                Welcome
+              </h2>
+              <p
+                style={{
+                  fontFamily: "Mulish",
+                  fontSize: 17,
+                  color: "#ababab",
+                  fontWeight: 600,
+                  margin: "20px",
+                }}
+              >
+                Enter few more details to get started
+              </p>
+            </div>
+          </div>
+          {/* <p                             //check
         style={{
           fontFamily: "Poppins",
           fontSize: 16,
@@ -337,41 +339,41 @@ const RegistrationDetails = ({ goBack, setLogin, userType, setUserType }) => {
       >
         Are you a student or a teacher/instructor ?
       </p> */}
-      <div
-        style={{
-          width: "100%",
-          display: "flex",
-          flexDirection: "row",
-          alignItems: "center",
-          justifyContent:"center"
-        }}
-      >
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            alignItems: "center",
-          }}
-        >
-          <label
-            class="checkbox-container"
-            style={{ borderColor: isStudent ? "#6C63FF" : "#eee" }}
+          <div
+            style={{
+              width: "100%",
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "center"
+            }}
           >
-            <Dribbble size={22} style={{ marginRight: 15 }} color="#545454" />
-            Student
-            <input
-              type="checkbox"
-              onClick={() => {
-                setIsStudent(true);
-                setUserType("student");
-                setIsTeacher(false);
-                setIsHod(false);
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                alignItems: "center",
               }}
-              checked={isStudent}
-            />
-            <span class="checkmark"></span>
-          </label>
-          {/* <label                                   //check
+            >
+              <label
+                class="checkbox-container"
+                style={{ borderColor: isStudent ? "#6C63FF" : "#eee" }}
+              >
+                <Dribbble size={22} style={{ marginRight: 15 }} color="#545454" />
+                Student
+                <input
+                  type="checkbox"
+                  onClick={() => {
+                    setIsStudent(true);
+                    setUserType("student");
+                    setIsTeacher(false);
+                    setIsHod(false);
+                  }}
+                  checked={isStudent}
+                />
+                <span class="checkmark"></span>
+              </label>
+              {/* <label                                   //check
             class="checkbox-container"
             style={{ borderColor: !isStudent ? "#6C63FF" : "#eee" }}
           >
@@ -387,47 +389,15 @@ const RegistrationDetails = ({ goBack, setLogin, userType, setUserType }) => {
             />
             <span class="checkmark"></span>
           </label> */}
-        </div>
-        </div>
-        <p
-        style={{
-          fontFamily: "Poppins",
-          fontSize: 16,
-          color: "#545454",
-          fontWeight: 600,
-          margin: 0,
-          textAlign: "left",
-          marginBottom: 10,
-          marginTop: 20,
-        }}
-      >
-        Personal Information
-      </p>
-      <div
-        style={{
-          width: "100%",
-          display: "flex",
-          flexDirection: "row",
-          justifyContent:"center",
-          alignItems: "center",
-        }}
-      >
-          <input placeholder="First Name" style={{ width:"15vw",height:"5vh",marginRight:"10px" }} onChange={onChangefName} />
-          <input placeholder="Last Name" style={{ width:"15vw",height:"5vh",marginLeft:"10px" }} onChange={onChangelName} />
-      </div>
-      {isStudent ? (
-        <div
-          style={{
+            </div>
+          </div>
+          <div style={{
             width: "100%",
             display: "flex",
             flexDirection: "row",
-            justifyContent:"center",
-            alignItems: "center",
-            marginTop: 20,
+            alignItems: "left",
+            justifyContent: "left"
           }}
-        >
-          <div
-            style={{display: "flex", flexDirection: "column",marginLeft:"90px" }}
           >
             <p
               style={{
@@ -436,188 +406,219 @@ const RegistrationDetails = ({ goBack, setLogin, userType, setUserType }) => {
                 color: "#545454",
                 fontWeight: 600,
                 margin: 0,
-                textAlign: "left",
-                marginBottom: "0.5rem",
+                // // textAlign: "left",
+                // marginBottom: 10,
+                // marginTop: 20,
+                paddingTop: 20,
+                paddingBottom: 1
               }}
             >
-              Select your year
+              Personal Information
             </p>
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "flex-start",
-              }}
-            >
-              <Dropdown
-                options={yearOptions}
-                style={{width:"300px"}}
-                onChange={(option) => setStudentClass(option.value)}
-                value={yearOptions[0].value}
-                placeholder="Select an option"
-                // className="dropdown"
-              />
-            </div>
           </div>
-          <div
-            style={{display: "flex", flexDirection: "column",marginLeft:"50px" }}
-          >
-            <p
-              style={{
-                fontFamily: "Poppins",
-                fontSize: 16,
-                color: "#545454",
-                fontWeight: 600,
-                margin: 0,
-                textAlign: "left",
-                marginBottom: "0.5rem",
-              }}
-            >
-              Select your Department
-            </p>
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "flex-start",
-              }}
-            >
-              <Dropdown
-                options={departmentOptions}
-                onChange={(option) => setStudentDepartment(option.value)}
-                value={departmentOptions[0].value}
-                placeholder="Select an option"
-                className="dropdown"
-              />
-            </div>
-          </div>
-        </div>
-      ) : null}
 
-        <div
-        style={{
-          display: "flex",
-          flexDirection: "row",
-          alignItems: "center",
-          justifyContent:"center",
-          marginTop: 25,
-        }}
-      >
-        <p
-          style={{
-            fontFamily: "Poppins",
-            fontSize: 16,
-            color: "#545454",
-            fontWeight: 600,
-            margin: 0,
-            textAlign: "left",
-          }}
-        >
-          Email and Password
-        </p>
-      </div>
-
-      <div
-        style={{
-          width: "100%",
-          display: "flex",
-          flexDirection: "row",
-          justifyContent:"center",
-          alignItems: "center",
-          marginTop: 10,
-        }}
-      >
-        <div
-          style={{ alignItems: "flex-start", display: "flex" }}
-        >
-          <input
-            type="email"
-            placeholder="Email ID"
-            onChange={onChangeEmail}
-            style={{ width:"15vw",height:"5vh",borderRadius:"3px" ,marginRight:"10px" }}
-            onBlur={() =>
-              validateEmail() ? null || true : toast.error("Invalid Email ID")
-            }
-          />
-        </div>
-        <div>
-          <div
+          <div className="yo"
             style={{
-              display: "inline-flex",
-              position: "relative",
               width: "100%",
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "center",
+              alignItems: "center",
             }}
           >
-            <input
-              type={viewPassword ? "password" : "text"}
-              placeholder="Password (Min length 5)"
-              onChange={onChangePassword}
-              style={{ width:"15vw",height:"5vh",borderRadius:"3px",marginLeft:"10px" }}
-              onBlur={() =>
-                validatePassword()
-                  ? null
-                  : toast.error("Password should have 5 or more characters")
-              }
-            />
-            {viewPassword ? (
-              <Eye
-                size={22}
-                color="#ababab"
-                style={{
-                  marginLeft:"20px",
-                  zIndex: 12,
-                  marginTop: 10,
-                  cursor: "pointer",
-                }}
-                onClick={() => setViewPassword(!viewPassword)}
+            <input placeholder="First Name" style={{ width: "100%", height: "45px", marginRight: "10px", border: "3px solid #EFEFEF", borderRadius: "7px" }} onChange={onChangefName} />
+            <input placeholder="Last Name" style={{ width: "100%", height: "45px", marginLeft: "10px", border: "3px solid #EFEFEF", borderRadius: "7px" }} onChange={onChangelName} />
+          </div>
+          {isStudent ? (
+            <div row style={{ width: "100%" }}>
+              <div col style={{ display: "inline" }}>
+                <div>
+                  <p
+                    style={{
+                      fontFamily: "Poppins",
+                      fontSize: 16,
+                      color: "#545454",
+                      fontWeight: 600,
+                      margin: 0,
+                    }}
+                  >
+                    Select your year
+                  </p>
+                </div>
+                <div>
+                  <Dropdown
+                    options={yearOptions}
+                    style={{ width: "300px" }}
+                    onChange={(option) => setStudentClass(option.value)}
+                    value={yearOptions[0].value}
+                    placeholder="Select an option"
+                  // className="dropdown"
+                  />
+                </div>
+              </div>
+              <div style={{ display: "inline" }}>
+                <div>
+                  <p
+                    style={{
+                      fontFamily: "Poppins",
+                      fontSize: 16,
+                      color: "#545454",
+                      fontWeight: 600,
+                    }}
+                  >
+                    Select your Department
+                  </p>
+                </div>
+                <div className="yo"
+                  style={{
+                    // display: "flex",
+                    // flexDirection: "column",
+                    // alignItems: "flex-start",
+                    // width: "300px"
+                  }}
+                >
+                  <Dropdown
+                    options={departmentOptions}
+                    style={{ width: "300px" }}
+                    onChange={(option) => setStudentDepartment(option.value)}
+                    value={departmentOptions[0].value}
+                    placeholder="Select an option"
+                    className="dropdown"
+                  />
+                </div>
+              </div>
+            </div>
+          ) : null}
+
+          <div
+            style={{
+              width: "100%",
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "left",
+              justifyContent: "left"
+            }}
+          >
+            <p
+              style={{
+                fontFamily: "Poppins",
+                fontSize: 16,
+                color: "#545454",
+                fontWeight: 600,
+                margin: 0,
+                // textAlign: "left",
+                // paddingTop: 20,
+                // paddingBottom: 1,
+              }}
+            >
+              Email and Password
+            </p>
+          </div>
+
+          <div className="yo"
+            style={{
+              width: "100%",
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "left",
+            }}
+          >
+            <div
+              style={{ alignItems: "flex-start", display: "flex", width: "50%" }}
+            >
+              <input
+                type="email"
+                placeholder="Email ID"
+                onChange={onChangeEmail}
+                style={{ width: "100%", height: "45px", borderRadius: "3px", marginRight: "10px", border: "3px solid #EFEFEF" }}
+                onBlur={() =>
+                  validateEmail() ? null || true : toast.error("Invalid Email ID")
+                }
               />
-            ) : (
-              <EyeOff
-                size={22}
-                color="#ababab"
+            </div>
+            <div >
+              <div
                 style={{
-                  marginLeft:"20px",
-                  zIndex: 12,
-                  marginTop: 10,
-                  cursor: "pointer",
+                  display: "inline-flex",
+                  position: "relative",
+                  width: "100%",
                 }}
-                onClick={() => setViewPassword(!viewPassword)}
-              />
-            )}
+              >
+                <input
+                  type={viewPassword ? "password" : "text"}
+                  placeholder="Password (Min length 5)"
+                  onChange={onChangePassword}
+                  style={{ width: "150%", height: "45px", borderRadius: "3px", marginLeft: "10px", border: "3px solid #EFEFEF" }}
+                  onBlur={() =>
+                    validatePassword()
+                      ? null
+                      : toast.error("Password should have 5 or more characters")
+                  }
+                />
+
+                <span style={{ display: "flex", alignItems: "center", justifyContent: "center", height: "45px" }}>
+                  {viewPassword ? (
+                    <Eye 
+                      size={22}
+                      color="#ababab"
+                      style={{
+                        marginLeft: "20px !important",
+                        zIndex: 12,
+                        marginTop: 10,
+                        cursor: "pointer",
+                      }}
+                      onClick={() => setViewPassword(!viewPassword)}
+                    />
+                  ) : (
+                    <EyeOff
+                      size={22}
+                      color="#ababab"
+                      style={{
+                        marginLeft: "20px !important",
+                        zIndex: 12,
+                        marginTop: 10,
+                        cursor: "pointer",
+                      }}
+                      onClick={() => setViewPassword(!viewPassword)}
+                    />
+                  )}
+                </span>
+
+              </div>
+            </div>
+          </div>
+          <div
+            style={{
+              marginTop: 40,
+              alignItems: "flex-end",
+              display: "flex",
+              flexDirection: "column",
+              marginRight: 10,
+            }}
+          >
+            <button
+              style={{padding:"10px 30px 10px 30px"}}
+              // onClick={userType === "student" ? registerStudent : registerTeacher}       /* check */
+              onClick={registerStudent}         /* updated check */
+              className="btn btn-new"
+            >
+              <p
+                style={{
+                  fontSize: 16,
+                  fontWeight: 600,
+                  color: "white",
+                  // backgroundColor: "#6C63FF",
+                  margin: 0,
+                  fontFamily: "Poppins",
+                  letterSpacing: 0.4,
+                }}
+              >
+                Register
+              </p>
+            </button>
           </div>
         </div>
-      </div>
-      <div
-        style={{
-          marginTop: 40,
-          alignItems: "flex-end",
-          display: "flex",
-          flexDirection: "column",
-          marginRight: 10,
-        }}
-      >
-        <button
-          // onClick={userType === "student" ? registerStudent : registerTeacher}       /* check */
-          onClick={registerStudent}         /* updated check */
-          className="btn btn-new"
-        >
-          <p
-            style={{
-              fontSize: 16,
-              fontWeight: 600,
-              color: "white",
-              // backgroundColor: "#6C63FF",
-              margin: 0,
-              fontFamily: "Poppins",
-              letterSpacing: 0.4,
-            }}
-          >
-            Register
-          </p>
-        </button>
-      </div>
-     </div>
-      <br />
+        <br />
       </div>
     </React.Fragment>
   );

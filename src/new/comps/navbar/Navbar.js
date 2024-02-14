@@ -73,21 +73,30 @@ class Navbar extends Component {
                   pathname: `/getStarted`,
                 }}
               > */}
-                {/* Get Started */}
+              {/* Get Started */}
               {/* </Link> */}
-			  <li className="nav-item px-1 icon">
-			 <Link className="nav-link nav-new" to='/getStarted'>
-			
-            Get Started
-			<ArrowRight
-            size={15}
-            // color="black"
-            style={{ marginLeft: "0.5rem",marginBottom:"0.2rem" }}
-          />
-			</Link>
-			  </li>
+              <li className="nav-item px-1 icon">
+                {/* <Link className="nav-link nav-new" to='/getStarted'>
+
+                  Get Started
+                  <ArrowRight
+                    size={15}
+                    // color="black"
+                    style={{ marginLeft: "0.5rem", marginBottom: "0.2rem" }}
+                  />
+                </Link> */}
+              </li>
             </ul>
           </div>
+          <Link className="nav-link nav-new" to='/getStarted'>
+
+            Get Started
+            <ArrowRight
+              size={15}
+              // color="black"
+              style={{ marginLeft: "0.5rem", marginBottom: "0.2rem" }}
+            />
+          </Link>
         </div>
       </nav>
     );
