@@ -9,7 +9,8 @@ import 'bootstrap-social/bootstrap-social.css';
 import { DurationProvider } from './components/contextAPI/DurationContext';       //new added part
 import { ActiveProvider } from './components/contextAPI/ActiveContext';           //new added part
 import { QrProvider } from './components/contextAPI/qrContext';                   //new added part
-import { ScannedProvider } from './components/contextAPI/ScannedContext';                        //new added part
+import { ScannedProvider } from './components/contextAPI/ScannedContext';         //new added part
+import { CodeProvider } from './components/contextAPI/codeContext';               //new added part
 
 
 ReactDOM.render(
@@ -18,7 +19,9 @@ ReactDOM.render(
   <DurationProvider>                            {/* new added part */}
   <QrProvider>                                  {/* new added part */}
   <ScannedProvider>                             {/* new added part */}
+  <CodeProvider>                                {/* new added part */}
     <App />
+  </CodeProvider>                               {/* new added part */}
   </ScannedProvider>                            {/* new added part */}
   </QrProvider>                                 {/* new added part */}
   </DurationProvider>                           {/* new added part */}

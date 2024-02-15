@@ -622,11 +622,11 @@ const Sidebar = () => {
             })}
 
             <div onClick={() => { window.location.href = " https://saumya25mis.github.io/Circuit-Simulator-main/" }} style={{ color: "black", marginLeft: "20px", cursor: "pointer" }}>
-              Simulator
+              Digital Simulator
             </div>
-            <div>
+            {/* <div>
               Analog Simulator
-            </div> 
+            </div>  */}
             {/* <Link to="/books"><div style={{color:"black",marginLeft:"20px",cursor:"pointer"}}>
 <i class="fa fa-lightbulb-o"></i>E-Library Manager</div></Link> */}
             <div
