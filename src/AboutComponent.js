@@ -101,12 +101,12 @@ function About(props) {
         {/* cards of teachers start */}
 
 
-        <div className="col-12 col-md-5" style={{"margin": "20px 0 0 0", textAlign:"center"}}>
+        <div className="col-12 col-md-5" style={{ "margin": "20px 0 0 0", textAlign: "center" }}>
           <Card >
             <CardHeader className="bg-new text-white text-center">
               <b>Head of the Department</b>
             </CardHeader>
-            <CardImg className="hod" src={hod} style ={{margin:"0 auto 0 auto"}}/>
+            <CardImg className="hod" src={hod} style={{ margin: "0 auto 0 auto" }} />
             <CardBody className="buddy">
               <dl className="row p-1">
                 <dt className="col-12">
@@ -156,9 +156,9 @@ function About(props) {
           <h2 className="">Faculty Members</h2>
         </div>
         <div className=" col-12">
-          <Media list className="row row-aboutus justify-content-between ">
+          <div className="row row-aboutus justify-content-between ">
             {/* <div className="col-12 mt-5"> */}
-           
+
 
 
             {/* Teacher 1 start */}
@@ -317,7 +317,7 @@ function About(props) {
 
 
             {/* self card start - shubham*/}
-            <div className="col col-lg-5 col-md-12 col-sm-12 col-xs-12 mt-5 teacherBox" >        {/* for the whole card */}
+            <div className="col col-lg-5 col-md-12 col-sm-12 col-xs-12 mt-5 teacherBox" >      {/* for the whole card */}
 
               <div className="row">
                 <div className="col-lg-4 col-md-4 col-sm-12 col-xs-12" style={{ "textAlign": "center" }}>
@@ -490,9 +490,13 @@ function About(props) {
 
 
             {/* self card start - shubham*/}
-            <div className="col col-lg-5 col-md-12 col-sm-12 col-xs-12 mt-5 teacherBox mg" >        {/* for the whole card */}
+            
 
-              <div className="row mg">
+            {/*  */}
+            {/* self card start - shubham*/}
+            <div className="col col-lg-5 col-md-12 col-sm-12 col-xs-12 mt-5 teacherBox" >        {/* for the whole card */}
+
+              <div className="row" >
                 <div className="col-lg-4 col-md-4 col-sm-12 col-xs-12" style={{ "textAlign": "center" }}>
                   <a href="https://www.sgsits.ac.in/files/downloads/RCGurjar.pdf">
                     <Media
@@ -510,12 +514,15 @@ function About(props) {
                   <p>Qualification:  M.E., Ph.D. Pursuing</p>
                   <p>Date of joining:  16/07/2007</p>
                   <p><i class="fa fa-phone"></i> : <a href="tel:091-731-2582424">091-731-2582424</a></p>
-                  <p><i class="fa fa-envelope"></i> : <a href="mailto:rcgurjar94@gmail.com">rcgurjar94@gmail.com</a></p>
+                  <p><i class="fa fa-envelope"></i> : <a href="mailto:mailto:rcgurjar94@gmail.com">rcgurjar94@gmail.com</a></p>
                   <p></p>
                 </div>
               </div>
 
             </div>
+            {/* self card end */}
+            {/*  */}
+
             {/* self card end */}
 
 
@@ -958,7 +965,7 @@ function About(props) {
                 </Media>
               </Media>
             </div> */}
-          </Media>
+          </div>
         </div>
 
       </div >
