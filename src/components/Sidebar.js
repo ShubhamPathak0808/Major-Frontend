@@ -19,7 +19,10 @@ import {
   Layout,
   Search,
   RotateCcw,
-  Activity
+  Activity,
+  Menu,
+  CreditCard,
+  BarChart2
 } from "react-feather";
 import { getRandomUser } from "./random";
 import { customStyles, customStyles2 } from "./CustomModalStyles";
@@ -31,6 +34,9 @@ let height = window.innerHeight * 2;
 let randomUser = getRandomUser();
 
 const Sidebar = () => {
+  // code for toggle functionality -- sp
+  const [viewBar, setViewBar] = useState(window.innerWidth > 789 ? true : false);
+
   localStorage.setItem(
     "theme",
     JSON.stringify(document.documentElement.style.getPropertyValue("--theme"))
@@ -60,6 +66,7 @@ const Sidebar = () => {
 
   const showSidebar = () => setSidebar(!sidebar);
   const openModal = () => setModal(true);
+  const toggleSideBar = () => setViewBar(!viewBar);
   const closeModal = () => setModal(false);
   const openModalProfile = () => setModalProfile(true);
   const closeModalProfile = () => setModalProfile(false);
@@ -165,6 +172,7 @@ const Sidebar = () => {
                 ? "#BABABA"
                 : "#232323"
           }
+          style={{ marginRight: 22 }}
         />
       ),
       path: "/home",
@@ -236,6 +244,8 @@ const Sidebar = () => {
                 ? "#BABABA"
                 : "#232323"
           }
+          style={{ marginRight: 22 }}
+
         />
       ),
       path: "/search",
@@ -288,6 +298,17 @@ const Sidebar = () => {
           borderBottomColor: theme === "dark" ? "#434343" : "#eee",
         }}
       >
+
+        {window.innerWidth <= 789 && (
+          <div className="settings-icon">
+            <Menu
+              size={21}
+              color={theme === "dark" ? "#eee" : "#232323"}
+              className="seticon"
+              onClick={toggleSideBar}
+            />
+          </div>
+        )}
         <div className="settings-icon">
           <Settings
             size={21}
@@ -355,36 +376,37 @@ const Sidebar = () => {
           </div>
         </div>
       </div>
-
-      <nav
-        className={"nav-menu active"}
-        style={{ backgroundColor: theme === "dark" ? "#212121" : "#f8f8f8" }}
-      >
-        <Scrollbars
-          style={{ width, height }}
-          autoHide
-          autoHideDuration={1000}
-          autoHideTimeout={800}
-          renderThumbVertical={({ style, ...props }) => (
-            <div
-              {...props}
-              className="subBG"
-              style={{
-                ...style,
-                opacity: 0.4,
-                borderRadius: 10,
-                width: 8,
-                paddingRight: 20,
-                marginRight: 20,
-              }}
-            />
-          )}
+      {viewBar && (
+        <nav
+          className={"nav-menu active"}
+          style={{ backgroundColor: theme === "dark" ? "#212121" : "#f8f8f8", width: "300px" }}
         >
-          <div
-            onClick={showSidebar}
-            className="nav-menu-items justify-content-center justify-items-center"
+          <Scrollbars
+            style={{ width: "300px", height }}
+            autoHide
+            autoHideDuration={1000}
+            autoHideTimeout={800}
+            renderThumbVertical={({ style, ...props }) => (
+              <div
+                {...props}
+                className="subBG"
+                style={{
+                  ...style,
+                  opacity: 0.4,
+                  borderRadius: 10,
+                  width: 8,
+                  paddingRight: 20,
+                  marginRight: 20,
+                }}
+              />
+            )}
           >
-            <Link to="/">
+            <div
+              onClick={showSidebar}
+              className="nav-menu-items justify-content-center justify-items-center"
+              style={{ width: "300px" }}
+            >
+
               <div
                 style={{
                   display: "flex",
@@ -394,11 +416,15 @@ const Sidebar = () => {
                   justifyContent: "center",
                   height: 80,
                   paddingRight: 30,
+                  width: "300px",
                   // display:"inline"
                 }}
               >
                 {/* <BookOpen size={30} color="#6C63FF" /> */}
-                <img className="logoimg" src={logo} />
+                <Link to="/">
+                  <img className="logoimg" src={logo} />
+                </Link>
+
                 <div
                   style={{
                     alignItems: "flex-start",
@@ -407,145 +433,137 @@ const Sidebar = () => {
                     // display:"inline"
                   }}
                 >
-                  <p
-                    style={{
-                      fontFamily: "Poppins",
-                      fontSize: 25,
-                      color: theme === "dark" ? "#eee" : "#232323",
-                      fontWeight: 600,
-                      paddingLeft: 10,
-                      margin: 0,
-                      letterSpacing: 0.25,
-                    }}
-                  >
-                    SGSITS
-                  </p>
-
+                  <Link to="/">
+                    <p
+                      style={{
+                        fontFamily: "Poppins",
+                        fontSize: 25,
+                        color: theme === "dark" ? "#eee" : "#232323",
+                        fontWeight: 600,
+                        paddingLeft: 10,
+                        margin: 0,
+                        letterSpacing: 0.25,
+                      }}
+                    >
+                      SGSITS
+                    </p>
+                  </Link>
+                  {window.innerWidth <= 789 && (
+                    <div className="settings-icon">
+                      <Menu
+                        size={21}
+                        color={theme === "dark" ? "#eee" : "#232323"}
+                        className="seticon"
+                        onClick={toggleSideBar}
+                      />
+                    </div>
+                  )}
                 </div>
               </div>
-            </Link>
-            {/* <div><h3>V</h3></div> */}
+
+              {/* <div><h3>V</h3></div> */}
 
 
 
 
-            <br
-              style={{
-                display: GetCurrentPath() === "/home" ? "block" : "none",
-              }}
-            />
+              <br
+                style={{
+                  display: GetCurrentPath() === "/home" ? "block" : "none",
+                }}
+              />
 
-            <div
-              style={{
-                width: "86%",
-                height: "auto",
-                borderRadius: 10,
-                margin: "20px 7% 30px 7%",
-                padding: 0,
-                display: GetCurrentPath() === "/home" ? "none" : "block",
-              }}
-              className=""
-            >
               <div
                 style={{
-                  display: "flex",
-                  flexDirection: "row",
-                  alignItems: "center",
-                  justifyContent: "flex-start",
+                  width: "300px",
+                  height: "auto",
+                  borderRadius: 10,
+                  margin: "20px 7% 30px 7%",
+                  padding: 0,
+                  display: GetCurrentPath() === "/home" ? "none" : "block",
                 }}
+                className=""
               >
                 <div
-                  className="changeColorBG"
                   style={{
-                    width: 50,
-                    height: 50,
-                    borderRadius: 25,
-                    backgroundColor: "#eee",
                     display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    overflow: "hidden",
                     flexDirection: "row",
-                    cursor: "pointer",
+                    alignItems: "center",
+                    justifyContent: "flex-start",
                   }}
-                  onClick={openModalProfile}
                 >
-                  <img
+                  <div
                     className="changeColorBG"
-                    src={randomUser}
                     style={{
-                      width: 40,
-                      height: 40,
-                      marginLeft: 0,
-                      marginTop: 5,
+                      width: 50,
+                      height: 50,
+                      borderRadius: 25,
+                      backgroundColor: "#eee",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      overflow: "hidden",
+                      flexDirection: "row",
+                      cursor: "pointer",
                     }}
-                  />
-                </div>
-                <div style={{ display: "flex", flexDirection: "column" }}>
-                  <p
-                    className="changeColor"
-                    style={{
-                      fontFamily: "Poppins",
-                      fontWeight: 500,
-                      color: !isLightTheme ? "#878787" : "#434343",
-                      fontSize: 14,
-                      textAlign: "left",
-                      letterSpacing: 0.3,
-                      margin: 0,
-                      padding: 0,
-                      marginLeft: 10,
-                    }}
+                    onClick={openModalProfile}
                   >
-                    Hey,
-                  </p>
-                  <p
-                    className="changeColor"
-                    style={{
-                      fontFamily: "Poppins",
-                      fontWeight: 500,
-                      color: !isLightTheme ? "#878787" : "#434343",
-                      fontSize: 18,
-                      textAlign: "left",
-                      letterSpacing: 0.3,
-                      margin: 0,
-                      padding: 0,
-                      marginLeft: 10,
-                      marginTop: 3,
-                    }}
-                  >
-                    {user.fName} {user.lName}
-                  </p>
+                    <img
+                      className="changeColorBG"
+                      src={randomUser}
+                      style={{
+                        width: 40,
+                        height: 40,
+                        marginLeft: 0,
+                        marginTop: 5,
+                      }}
+                    />
+                  </div>
+                  <div style={{ display: "flex", flexDirection: "column" }}>
+                    <p
+                      className="changeColor"
+                      style={{
+                        fontFamily: "Poppins",
+                        fontWeight: 500,
+                        color: !isLightTheme ? "#878787" : "#434343",
+                        fontSize: 14,
+                        textAlign: "left",
+                        letterSpacing: 0.3,
+                        margin: 0,
+                        padding: 0,
+                        marginLeft: 10,
+                      }}
+                    >
+                      Hey,
+                    </p>
+                    <p
+                      className="changeColor"
+                      style={{
+                        fontFamily: "Poppins",
+                        fontWeight: 500,
+                        color: !isLightTheme ? "#878787" : "#434343",
+                        fontSize: 18,
+                        textAlign: "left",
+                        letterSpacing: 0.3,
+                        margin: 0,
+                        padding: 0,
+                        marginLeft: 10,
+                        marginTop: 3,
+                      }}
+                    >
+                      {user.fName} {user.lName}
+                    </p>
+                  </div>
                 </div>
-              </div>
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "row",
-                  alignItems: "center",
-                }}
-              >
-                <div className="profile-option" onClick={openModal}>
-                  <Edit3 size={15} />
-                  <p
-                    className="sub"
-                    style={{
-                      fontFamily: "Poppins",
-                      fontWeight: 500,
-                      color: !isLightTheme ? "#878787" : "#434343",
-                      fontSize: 13,
-                      textAlign: "left",
-                      letterSpacing: 0.3,
-                      margin: 0,
-                      padding: 0,
-                      marginLeft: 10,
-                    }}
-                  >
-                    Edit profile
-                  </p>
-                </div>
-                <Link to="/">
-                  <div className="profile-option" onClick={logout}>
-                    <LogOut size={15} className="changeColor" />
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    alignItems: "center",
+                    width:"fit-content",
+                  }}
+                >
+                  <div className="profile-option" onClick={openModal}>
+                    <Edit3 size={15} />
                     <p
                       className="sub"
                       style={{
@@ -560,212 +578,234 @@ const Sidebar = () => {
                         marginLeft: 10,
                       }}
                     >
-                      Logout
+                      Edit profile
                     </p>
                   </div>
-                </Link>
+                  <Link to="/">
+                    <div className="profile-option" onClick={logout}>
+                      <LogOut size={15} className="changeColor" />
+                      <p
+                        className="sub"
+                        style={{
+                          fontFamily: "Poppins",
+                          fontWeight: 500,
+                          color: !isLightTheme ? "#878787" : "#434343",
+                          fontSize: 13,
+                          textAlign: "left",
+                          letterSpacing: 0.3,
+                          margin: 0,
+                          padding: 0,
+                          marginLeft: 10,
+                        }}
+                      >
+                        Logout
+                      </p>
+                    </div>
+                  </Link>
+                </div>
               </div>
-            </div>
 
-            {menuOptions.map((item, index) => {
-              return (
-                <Link to={item.path}>
-                  <div
-                    key={index}
-                    className="nav-text"
-                    style={{
-                      fontFamily: "Poppins",
-                      paddingLeft: 2,
-                      paddingBottom: 5,
-                      paddingTop: 5,
-                      borderColor:
-                        GetCurrentPath() === item.path
-                          ? "#6C63FFaa"
-                          : "transparent",
-                    }}
-                  >
-                    <span
-                      className="row"
+              {menuOptions.map((item, index) => {
+                return (
+                  <Link to={item.path}>
+                    <div
+                      key={index}
+                      className="nav-text"
                       style={{
-                        color:
+                        fontFamily: "Poppins",
+                        paddingLeft: 2,
+                        paddingBottom: 5,
+                        paddingTop: 5,
+                        borderColor:
                           GetCurrentPath() === item.path
-                            ? "#6C63FF"
-                            : theme === "dark"
-                              ? "#BABABA"
-                              : "#232323",
-                        fontSize: 17,
-                        letterSpacing: 0.4,
-                        fontWeight: 500,
+                            ? "#6C63FFaa"
+                            : "transparent",
                       }}
                     >
-                      {item.icon}
-                    </span>
-                    <span
-                      className="row"
-                      style={{
-                        color:
-                          GetCurrentPath() === item.path
-                            ? "#6C63FF"
-                            : theme === "dark"
-                              ? "#BABABA"
-                              : "#232323",
-                        fontSize: 17,
-                        letterSpacing: 0.4,
-                        fontWeight: 500,
-                      }}
-                    >
-                      {item.title}
-                    </span>
-                  </div>
-                </Link>
-              );
-            })}
+                      <span
+                        className="row"
+                        style={{
+                          color:
+                            GetCurrentPath() === item.path
+                              ? "#6C63FF"
+                              : theme === "dark"
+                                ? "#BABABA"
+                                : "#232323",
+                          fontSize: 17,
+                          letterSpacing: 0.4,
+                          fontWeight: 500,
+                        }}
+                      >
+                        {item.icon}
+                      </span>
+                      <span
+                        className="row"
+                        style={{
+                          color:
+                            GetCurrentPath() === item.path
+                              ? "#6C63FF"
+                              : theme === "dark"
+                                ? "#BABABA"
+                                : "#232323",
+                          fontSize: 17,
+                          letterSpacing: 0.4,
+                          fontWeight: 500,
+                        }}
+                      >
+                        {item.title}
+                      </span>
+                    </div>
+                  </Link>
+                );
+              })}
 
-            <div onClick={() => { window.location.href = " https://saumya25mis.github.io/Circuit-Simulator-main/" }} style={{ color: "black", marginLeft: "20px", cursor: "pointer" }}>
-              Digital Simulator
-            </div>
-            {/* <div>
+              <div onClick={() => { window.location.href = " https://saumya25mis.github.io/Circuit-Simulator-main/" }} style={{ color: "black", marginLeft: "20px", cursor: "pointer" }}>
+                <BarChart2 style={{ marginLeft: "5px", marginRight: "9px", size: "20" }} />
+                Digital Simulator
+              </div>
+              {/* <div>
               Analog Simulator
             </div>  */}
-            {/* <Link to="/books"><div style={{color:"black",marginLeft:"20px",cursor:"pointer"}}>
+              {/* <Link to="/books"><div style={{color:"black",marginLeft:"20px",cursor:"pointer"}}>
 <i class="fa fa-lightbulb-o"></i>E-Library Manager</div></Link> */}
-            <div
-              style={{
-                width: "13em",
-                height: 85,
-                borderRadius: 10,
-                backgroundColor: "#6C63FF2a",
-                margin: "20px 7%",
-                padding: "15px 15px",
-              }}
-              className=""
-            >
               <div
                 style={{
-                  display: "flex",
-                  flexDirection: "row",
-                  alignItems: "center",
-                  justifyContent: "space-between",
+                  width: "13em",
+                  height: 85,
+                  borderRadius: 10,
+                  backgroundColor: "#6C63FF2a",
+                  margin: "20px 7%",
+                  padding: "15px 15px",
                 }}
+                className=""
               >
-                <p
-                  className="changeColor"
-                  style={{
-                    fontFamily: "Poppins",
-                    fontWeight: 500,
-                    color: !isLightTheme ? "#878787" : "#434343",
-                    fontSize: 15,
-                    textAlign: "left",
-                    letterSpacing: 0.3,
-                    margin: 0,
-                    padding: 0,
-                  }}
-                >
-                  {isLightTheme ? "Light theme" : "Dark theme"}
-                </p>
-                <Toggle
-                  defaultChecked={isLightTheme}
-                  icons={{
-                    checked: (
-                      <Moon
-                        size={17}
-                        color="#232323"
-                        style={{ position: "absolute", top: -3 }}
-                      />
-                    ),
-                    unchecked: (
-                      <Sun
-                        size={14}
-                        color="#fff"
-                        style={{ position: "absolute", top: -2 }}
-                      />
-                    ),
-                  }}
-                  className="toggle"
-                  onChange={handleThemeChange}
-                />
-              </div>
-              <p
-                className="sub"
-                style={{
-                  fontFamily: "Poppins",
-                  fontWeight: 500,
-                  color: theme === "dark" ? "#878787" : "#434343",
-                  fontSize: 13,
-                  textAlign: "left",
-                  letterSpacing: 0.3,
-                  margin: 0,
-                  padding: 0,
-                  marginTop: 10,
-                }}
-              >
-                Switch to {isLightTheme ? "dark" : "light"} theme now
-              </p>
-            </div>
-            {
-              userType === "hod" ? null : (
                 <div
                   style={{
                     display: "flex",
                     flexDirection: "row",
                     alignItems: "center",
-                    width: "100%",
-                    paddingLeft: 30,
-                    paddingRight: 20,
                     justifyContent: "space-between",
                   }}
                 >
                   <p
-                    className="sub"
+                    className="changeColor"
                     style={{
                       fontFamily: "Poppins",
                       fontWeight: 500,
-                      color: theme === "dark" ? "#878787" : "#434343",
+                      color: !isLightTheme ? "#878787" : "#434343",
                       fontSize: 15,
                       textAlign: "left",
                       letterSpacing: 0.3,
-                      margin: "10px 0",
-                      marginTop: 18,
+                      margin: 0,
                       padding: 0,
                     }}
                   >
-                    MY COURSES
+                    {isLightTheme ? "Light theme" : "Dark theme"}
                   </p>
+                  <Toggle
+                    defaultChecked={isLightTheme}
+                    icons={{
+                      checked: (
+                        <Moon
+                          size={17}
+                          color="#232323"
+                          style={{ position: "absolute", top: -3 }}
+                        />
+                      ),
+                      unchecked: (
+                        <Sun
+                          size={14}
+                          color="#fff"
+                          style={{ position: "absolute", top: -2 }}
+                        />
+                      ),
+                    }}
+                    className="toggle"
+                    onChange={handleThemeChange}
+                  />
                 </div>
-              )}
-            {sidebarData.map((item, index) => {
-              {/* console.log( "id is : " + item._id); */ }
-              return (
-                <Link to={`/course/${item._id}`}>
+                <p
+                  className="sub"
+                  style={{
+                    fontFamily: "Poppins",
+                    fontWeight: 500,
+                    color: theme === "dark" ? "#878787" : "#434343",
+                    fontSize: 13,
+                    textAlign: "left",
+                    letterSpacing: 0.3,
+                    margin: 0,
+                    padding: 0,
+                    marginTop: 10,
+                  }}
+                >
+                  Switch to {isLightTheme ? "dark" : "light"} theme now
+                </p>
+              </div>
+              {
+                userType === "hod" ? null : (
                   <div
-                    key={index}
-                    className="nav-text"
-                    style={{ paddingLeft: 15, fontFamily: "Poppins" }}
+                    style={{
+                      display: "flex",
+                      flexDirection: "row",
+                      alignItems: "center",
+                      width: "100%",
+                      paddingLeft: 30,
+                      paddingRight: 20,
+                      justifyContent: "space-between",
+                    }}
                   >
-                    <span
-                      className="row"
+                    <p
+                      className="sub"
                       style={{
-                        color:
-                          GetCurrentPath() === `/course/${item._id}`
-                            ? "#6C63FF"
-                            : theme === "dark"
-                              ? "#BABABA"
-                              : "#232323",
+                        fontFamily: "Poppins",
                         fontWeight: 500,
+                        color: theme === "dark" ? "#878787" : "#434343",
+                        fontSize: 15,
+                        textAlign: "left",
                         letterSpacing: 0.3,
-                        fontSize: 16,
+                        margin: "10px 0",
+                        marginTop: 18,
+                        padding: 0,
                       }}
                     >
-                      {" "}
-                      {item.name}{" "}
-                    </span>
+                      MY COURSES
+                    </p>
                   </div>
-                </Link>
-              );
-            })}
-          </div>
-        </Scrollbars>
-      </nav>
+                )}
+              {sidebarData.map((item, index) => {
+                {/* console.log( "id is : " + item._id); */ }
+                return (
+                  <Link to={`/course/${item._id}`}>
+                    <div
+                      key={index}
+                      className="nav-text"
+                      style={{ paddingLeft: 15, fontFamily: "Poppins" }}
+                    >
+                      <span
+                        className="row"
+                        style={{
+                          color:
+                            GetCurrentPath() === `/course/${item._id}`
+                              ? "#6C63FF"
+                              : theme === "dark"
+                                ? "#BABABA"
+                                : "#232323",
+                          fontWeight: 500,
+                          letterSpacing: 0.3,
+                          fontSize: 16,
+                        }}
+                      >
+                        {" "}
+                        {item.name}{" "}
+                      </span>
+                    </div>
+                  </Link>
+                );
+              })}
+            </div>
+          </Scrollbars>
+        </nav>
+      )}
 
       <Modal
         isOpen={modalIsOpen}
