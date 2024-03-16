@@ -4,45 +4,45 @@ import { Button, Grid, styled } from '@material-ui/core';
 import { Activity, Code, BarChart2, GitCommit } from 'react-feather';
 
 import CodeEditor from './CodeEditor';
-import { CodeContext } from './contextAPI/codeContext'; //new added part
+import { CodeContext } from './contextAPI/codeContext';
 
-// const handleCode = async () =>{
-//    // handle by yash
-//  const { coding, setCoding } = useContext(CodeContext);      //new added part
-// console.log(coding);
-// }
-
-const RunSimulationButton = () => {                                //new added part
+const RunSimulationButton = ({setResult, setImageData}) => {
     const { coding } = useContext(CodeContext);
-  
-    const handleClick = async(e) => {                                   
-    //   handleCode(coding); // Pass coding as a parameter
-    console.log(coding);
-    
+    const [isLoading, setIsLoading] = useState(false);
 
-    //connection of backend vaala part
-    // e.preventDefault();
+    const handleClick = async (e) => {
+        e.preventDefault();
+        setIsLoading(true);
 
-    // try {
-    //     axios.post("http://localhost:8000/coding", {
-    //         coding: coding // Ensure coding has a value before sending
-    //      }).then((response) => {
-    //         // Handle successful response
-    //         console.log("coding response: ",response.data)
-    //      }).catch((error) => {
-    //         // Handle error
-    //         console.log("failed coding api request, the error is: ",error)
-    //      });
-    // } catch (error) {
-    //   console.error("Error:", error);
-    //   alert("Error sending code to server: " + error.message);
-    // }
+        try {
+            const response = await axios.post("http://localhost:8000/api/run_code", {
+                coding: coding // Ensure coding has a value before sending
+            });
+
+            // Handle successful response
+            setResult(response.data.result); // Update result state
+            setImageData(response.data.image); // Update image data state
+        } catch (error) {
+            // Handle error
+            console.log("failed coding api request, the error is: ", error);
+            alert("Error sending code to server: " + error.message);
+        } finally {
+            setIsLoading(false);
+        }
     };
-  
-    return <Button variant="contained" onClick={handleClick}>Run Simulation</Button>;
-  };
+
+    return (
+        <Button variant="contained" onClick={handleClick} disabled={isLoading}>
+            {isLoading ? "Running Simulation..." : "Run Simulation"}
+        </Button>
+    );
+};
+
 
 const AnalogSimulator = () => {
+
+    const [result, setResult] = useState('');
+    const [imageData, setImageData] = useState(null);
 
     return (
         <div>
@@ -66,9 +66,9 @@ const AnalogSimulator = () => {
                         />
                         Code
                     </h3>
-                    <CodeEditor initialValue="// write your LT spice code here"/>
+                    <CodeEditor initialValue="// write your NGs spice code here"/>
                     {/* <Button variant="contained" onClick={handleCode}>Run Simulation</Button> */}
-                    <RunSimulationButton />
+                    <RunSimulationButton setResult={setResult} setImageData={setImageData} />
                 </Grid>
                 <Grid item lg={6} md={6} sm={12} xs={12} style={{ border: "2px solid #6C63FF", height: "80vh" }}>
                     <h2 style={{ textAlign: 'center' }}>
@@ -79,6 +79,7 @@ const AnalogSimulator = () => {
                         />
                         Graph
                     </h2>
+                    {imageData && <img src={`data:image/png;base64,${imageData}`} alt="Graph" />}
                 </Grid>
                 <Grid item lg={12} md={12} sm={12} xs={12} style={{ border: "2px solid #6C63FF" }}>
                     <h3 style={{ textAlign: 'left' }}>
@@ -89,6 +90,7 @@ const AnalogSimulator = () => {
                         />
                         Console
                     </h3>
+                    <pre>{result}</pre>
                 </Grid>
             </Grid>
         </div>
