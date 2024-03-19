@@ -29,7 +29,7 @@ class Login extends Component {
         password:this.state.password,
       }
       // console.log(data)
-        axios.post('http://localhost:8000/user/login',data).then((res)=>{
+        axios.post('http://10.25.100.77:8000/user/login',data).then((res)=>{
           console.log(res.data)
          if(res.data.email){
            var d={email:res.data.email,role:res.data.role}
