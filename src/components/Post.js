@@ -44,7 +44,7 @@ const Post = ({
   if (isQuiz) type = "QUIZ";
 
   const deleteAssignment = () => {
-    Axios.delete(`http://10.25.100.77:8000/api/assignment/${assID}`)
+    Axios.delete(`http://10.25.101.103:8000/api/assignment/${assID}`)
       .then((res) => {
         if (res.data.success) {
           toast.success("Assignment deleted successfully");
@@ -214,7 +214,7 @@ const Post = ({
                   />
                 </div>
               ) : null}
-              <a href={`http://10.25.100.77:8000/api/assignment/attachment/${assID}`} target="_blank">
+              <a href={`http://10.25.101.103:8000/api/assignment/attachment/${assID}`} target="_blank">
                 <p
                   style={{
                     fontSize: 16,

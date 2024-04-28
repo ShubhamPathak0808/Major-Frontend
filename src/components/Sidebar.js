@@ -76,7 +76,7 @@ const Sidebar = () => {
   }
 
   React.useEffect(() => {
-    Axios.get(`http://10.25.100.77:8000/api/${userType}/${user._id}`, {
+    Axios.get(`http://10.25.101.103:8000/api/${userType}/${user._id}`, {
       header: {
         "Content-Type": "application/json; charset=utf-8",
       },
@@ -93,7 +93,7 @@ const Sidebar = () => {
 
   React.useEffect(() => {
     if (userType === "teacher" || userType == "hod") return;
-    Axios.get(`http://10.25.100.77:8000/api/fetchCourse/student/${user._id}`, {
+    Axios.get(`http://10.25.101.103:8000/api/fetchCourse/student/${user._id}`, {
       header: {
         "Content-Type": "application/json; charset=utf-8",
       },
@@ -112,7 +112,7 @@ const Sidebar = () => {
 
   React.useEffect(() => {
     if (userType === "student" || userType == "hod") return;
-    Axios.get(`http://10.25.100.77:8000/api/fetchCourse/teacher/${user._id}`, {
+    Axios.get(`http://10.25.101.103:8000/api/fetchCourse/teacher/${user._id}`, {
       header: {
         "Content-Type": "application/json; charset=utf-8",
       },
@@ -260,7 +260,7 @@ const Sidebar = () => {
       return toast.error("Name fields cannot be empty");
     }
 
-    const url = `http://10.25.100.77:8000/api/update/${userType}`;
+    const url = `http://10.25.101.103:8000/api/update/${userType}`;
     Axios.post(url, {
       fName: newFName,
       lName: newLName,
