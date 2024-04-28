@@ -73,7 +73,7 @@ const Features = () => {
   });
 };
 const goAboutUs=()=>{
-  window.location.href="http://localhost:3000/aboutus";
+  window.location.href="http://10.25.101.103:8000/aboutus";
 }
 const GetStarted = ({ goNext }) => {
   return (

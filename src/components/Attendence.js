@@ -229,7 +229,7 @@ const Attendence = ({ history }) => {
 	const [courseID, setcourseID] = React.useState(0);
 
 	const { qr, setqr } = useContext(qrContext);
-	const qr_url = `http://10.25.101.103:3000/attendence/${qr}`; //new part added
+	const qr_url = `http://10.25.101.103:8000/attendence/${qr}`; //new part added
 
 	const { scan, setScan } = useContext(ScannedContext); //new part added
 
