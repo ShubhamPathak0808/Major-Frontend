@@ -229,7 +229,7 @@ const Attendence = ({ history }) => {
 	const [courseID, setcourseID] = React.useState(0);
 
 	const { qr, setqr } = useContext(qrContext);
-	const qr_url = `http://10.25.101.103:8000/attendence/${qr}`; //new part added
+	const qr_url = `http://10.25.101.103/attendence/${qr}`; //new part added
 
 	const { scan, setScan } = useContext(ScannedContext); //new part added
 
@@ -306,7 +306,7 @@ const Attendence = ({ history }) => {
 	//   let loc = window.location.href.split("/");
 	//   let attendenceId = loc[loc.length - 1];
 
-	//   const fetchAttendanceResults = async () => {
+	//   const fetchAttenanceResults = async () => {
 	//     try {
 	//       const res = await Axios.get(`http://10.25.101.103:8000/api/attendenceResult/${attendenceId}`);
 	//       if (res.data.success) {

@@ -21,13 +21,17 @@ const QrScanner = () => {
 
 
 		const presentPageURL = window.location.href;
+
+		console.log(decodedText);
+		console.log(presentPageURL)
+
 		if (decodedText === presentPageURL) {
 			setScan(true);
-      window.alert("matched successfully");
+      		window.alert("matched successfully");
 		}
-    else{ window.alert("wrong qr code scanned");}
-
-    
+    	else { 
+			window.alert("wrong qr code scanned");
+		}
 
 		console.log(scan);
 		// window.location.href = decodedText;
