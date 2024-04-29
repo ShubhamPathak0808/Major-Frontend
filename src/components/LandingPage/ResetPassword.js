@@ -32,7 +32,7 @@ const ResetPassword = ({}) => {
     }
 
     Axios.post(
-      `http://10.25.101.103:8000/api/resetPassword/${loc[loc.length - 3]}/${loc[loc.length - 2]}/${loc[loc.length - 1]}`,
+      `http://10.25.100.17:8000/api/resetPassword/${loc[loc.length - 3]}/${loc[loc.length - 2]}/${loc[loc.length - 1]}`,
       {
         password: encrypt(password),
       }

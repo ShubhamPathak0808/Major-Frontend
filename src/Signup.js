@@ -39,7 +39,7 @@ class Signup extends Component {
           role:this.state.role
         }
         console.log(data)
-          axios.post('http://10.25.101.103:8000/user/signup',data).then((res)=>{
+          axios.post('http://10.25.100.17:8000/user/signup',data).then((res)=>{
             if(res.data.email){
               var d={email:res.data.email,role:res.data.role,name:res.data.name}
               localStorage.setItem('email',d.email)

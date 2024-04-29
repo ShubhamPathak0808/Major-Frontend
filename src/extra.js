@@ -49,7 +49,7 @@ class Extra extends React.Component {
     this.setState({ author: e.target.value });
   }
   addCopy(id) {
-    fetch(`http://10.25.101.103:8000/addcopies/${id}`).then((error, res) => {
+    fetch(`http://10.25.100.17:8000/addcopies/${id}`).then((error, res) => {
       this.getArticles();
     });
   }
@@ -69,7 +69,7 @@ class Extra extends React.Component {
       data.pub_year != "" &&
       data.copies != ""
     ) {
-      axios.post("http://10.25.101.103:8000/addbook", data).then((error, res) => {
+      axios.post("http://10.25.100.17:8000/addbook", data).then((error, res) => {
         this.getArticles();
       });
     }
@@ -102,7 +102,7 @@ class Extra extends React.Component {
       });
   }
   getTopIssued() {
-    fetch("http://10.25.101.103:8000/topissued")
+    fetch("http://10.25.100.17:8000/topissued")
       .then((response) => response.json())
       .then((res) =>
         res.data.map((article) => ({

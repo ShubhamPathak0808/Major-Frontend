@@ -473,7 +473,7 @@ const QuizQuestion = ({ history }) => {
     let _id = null;
     var QID = 1;
 
-    Axios.post("http://10.25.101.103:8000/api/quiz", quiz)
+    Axios.post("http://10.25.100.17:8000/api/quiz", quiz)
       .then((res) => {
         if (res.data.success) {
           _id = res.data.data._id;
@@ -483,7 +483,7 @@ const QuizQuestion = ({ history }) => {
             Promise.all(
               questions.map((ques) => {
                 ques.quiz_id = _id;
-                Axios.post("http://10.25.101.103:8000/api/quizQuestion", ques)
+                Axios.post("http://10.25.100.17:8000/api/quizQuestion", ques)
                   .then((res) => {})
                   .catch((e) => console.log(e));
               })

@@ -41,7 +41,7 @@ const MyCourses = () => {
 
   React.useEffect(() => {
     //user
-    Axios.get(`http://10.25.101.103:8000/api/${userType}/${_id}`, {
+    Axios.get(`http://10.25.100.17:8000/api/${userType}/${_id}`, {
       header: {
         "Content-Type": "application/json; charset=utf-8",
       },
@@ -60,7 +60,7 @@ const MyCourses = () => {
       });
 
     //courses
-    Axios.get(`http://10.25.101.103:8000/api/fetchCourse/${userType}/${_id}`, {
+    Axios.get(`http://10.25.100.17:8000/api/fetchCourse/${userType}/${_id}`, {
       header: {
         "Content-Type": "application/json; charset=utf-8",
       },
@@ -79,7 +79,7 @@ const MyCourses = () => {
   const getTeachers = () => {
     let courseArray = [...courseTeachers];
     courses.map((course, index) => {
-      Axios.get(`http://10.25.101.103:8000/api/teacher/${course.teacher_id}`, {
+      Axios.get(`http://10.25.100.17:8000/api/teacher/${course.teacher_id}`, {
         header: {
           "Content-Type": "application/json; charset=utf-8",
         },
@@ -97,7 +97,7 @@ const MyCourses = () => {
   const getStudentCount = () => {
     let courseArray = [...studentCount];
     courses.map((course, index) => {
-      Axios.get(`http://10.25.101.103:8000/api/studentCount/${course._id}`, {
+      Axios.get(`http://10.25.100.17:8000/api/studentCount/${course._id}`, {
         header: {
           "Content-Type": "application/json; charset=utf-8",
         },

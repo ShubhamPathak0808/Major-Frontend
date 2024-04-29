@@ -15,7 +15,7 @@ const RunSimulationButton = ({setResult, setImageData}) => {
         setIsLoading(true);
 
         try {
-            const response = await axios.post("http://10.25.101.103:8000/api/run_code", {
+            const response = await axios.post("http://10.25.100.17:8000/api/run_code", {
                 coding: coding // Ensure coding has a value before sending
             });
 
