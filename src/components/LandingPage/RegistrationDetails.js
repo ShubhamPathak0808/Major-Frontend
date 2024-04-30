@@ -94,7 +94,7 @@ const RegistrationDetails = ({ goBack, setLogin, userType, setUserType }) => {
       );
     }
     console.log(password)
-    Axios.post("http://10.25.100.17:8000/api/students", {
+    Axios.post("http://localhost:8000/api/students", {
       fName,
       lName,
       email,
@@ -104,7 +104,7 @@ const RegistrationDetails = ({ goBack, setLogin, userType, setUserType }) => {
     })
       .then((res) => {
         if (res.status === 200 && res.data.success) {
-          Axios.post("http://10.25.100.17:8000/api/students/login", {
+          Axios.post("http://localhost:8000/api/students/login", {
             email: email,
             password: password,
           }).then((res) => {
@@ -148,7 +148,7 @@ const RegistrationDetails = ({ goBack, setLogin, userType, setUserType }) => {
       );
     }
 
-    Axios.post("http://10.25.100.17:8000/api/teachers", {
+    Axios.post("http://localhost:8000/api/teachers", {
       fName,
       lName,
       email,
@@ -156,7 +156,7 @@ const RegistrationDetails = ({ goBack, setLogin, userType, setUserType }) => {
     })
       .then((res) => {
         if (res.status === 200 && res.data.success) {
-          Axios.post("http://10.25.100.17:8000/api/teachers/login", {
+          Axios.post("http://localhost:8000/api/teachers/login", {
             email: email,
             password: password,
           }).then((res) => {
@@ -201,7 +201,7 @@ const RegistrationDetails = ({ goBack, setLogin, userType, setUserType }) => {
       );
     }
 
-    Axios.post("http://10.25.100.17:8000/api/hod", {
+    Axios.post("http://localhost:8000/api/hod", {
       fName,
       lName,
       email,
@@ -209,7 +209,7 @@ const RegistrationDetails = ({ goBack, setLogin, userType, setUserType }) => {
     })
       .then((res) => {
         if (res.status === 200 && res.data.success) {
-          Axios.post("http://10.25.100.17:8000/api/hod/login", {
+          Axios.post("http://localhost:8000/api/hod/login", {
             email: email,
             password: password,
           }).then((res) => {

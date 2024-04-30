@@ -102,7 +102,7 @@ const AssessmentReport = (props) => {
   let studentMarksInfo = [];
 
   React.useEffect(() => {
-    Axios.get(`http://10.25.100.17:8000/api/assignment/${assignmentID}`)
+    Axios.get(`http://localhost:8000/api/assignment/${assignmentID}`)
       .then((res) => {
         let a = res.data.data;
         a.max_marks = parseInt(a.max_marks);
@@ -117,7 +117,7 @@ const AssessmentReport = (props) => {
   React.useEffect(() => {
     let arr = window.location.href.split("/");
     let assignmentID = arr[arr.length - 1];
-    Axios.get(`http://10.25.100.17:8000/api/studentCount/assignment/${assignmentID}`)
+    Axios.get(`http://localhost:8000/api/studentCount/assignment/${assignmentID}`)
       .then((res) => {
         let a = res.data.count;
         setStudentCount(a);
@@ -130,11 +130,11 @@ const AssessmentReport = (props) => {
   React.useEffect(() => {
     let arr = window.location.href.split("/");
     let assignmentID = arr[arr.length - 1];
-    Axios.get(`http://10.25.100.17:8000/api/marks/${assignmentID}`)
+    Axios.get(`http://localhost:8000/api/marks/${assignmentID}`)
       .then((res) => {
         let a = res.data;
 
-        Axios.get(`http://10.25.100.17:8000/api/course/students/${props.courseId}`)
+        Axios.get(`http://localhost:8000/api/course/students/${props.courseId}`)
           .then((res) => {
             let students = res.data.data;
             let unsubmitted = students.filter((student) => {

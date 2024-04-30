@@ -39,7 +39,7 @@ const Hodhome = () => {
     const [studentCount4, setStudentCount4] = React.useState([]);
 
     React.useEffect(() => {
-        Axios.get(`http://10.25.100.17:8000/api/${userType}/${_id}`, {
+        Axios.get(`http://localhost:8000/api/${userType}/${_id}`, {
         header: {
             "Content-Type": "application/json; charset=utf-8",
         },
@@ -56,7 +56,7 @@ const Hodhome = () => {
         });
 
         // Get Second year courses
-        Axios.get(`http://10.25.100.17:8000/api/fetchCourse/First%20Year`, {
+        Axios.get(`http://localhost:8000/api/fetchCourse/First%20Year`, {
             header: {
             "Content-Type": "application/json; charset=utf-8",
             },
@@ -71,7 +71,7 @@ const Hodhome = () => {
         .catch((error) => {});
 
         // Get Third year courses
-        Axios.get(`http://10.25.100.17:8000/api/fetchCourse/Third%20Year`, {
+        Axios.get(`http://localhost:8000/api/fetchCourse/Third%20Year`, {
             header: {
             "Content-Type": "application/json; charset=utf-8",
             },
@@ -86,7 +86,7 @@ const Hodhome = () => {
         .catch((error) => {});
 
         // Get Fourth year courses
-        Axios.get(`http://10.25.100.17:8000/api/fetchCourse/Fourth%20Year`, {
+        Axios.get(`http://localhost:8000/api/fetchCourse/Fourth%20Year`, {
             header: {
             "Content-Type": "application/json; charset=utf-8",
             },
@@ -105,7 +105,7 @@ const Hodhome = () => {
   const getTeachers2 = () => {
     let courseArray = [...courseTeachers2];
     courses2.map((course, index) => {
-      Axios.get(`http://10.25.100.17:8000/api/teacher/${course.teacher_id}`, {
+      Axios.get(`http://localhost:8000/api/teacher/${course.teacher_id}`, {
         header: {
           "Content-Type": "application/json; charset=utf-8",
         },
@@ -123,7 +123,7 @@ const Hodhome = () => {
   const getStudentCount2 = () => {
     let courseArray = [...studentCount2];
     courses2.map((course, index) => {
-      Axios.get(`http://10.25.100.17:8000/api/studentCount/${course._id}`, {
+      Axios.get(`http://localhost:8000/api/studentCount/${course._id}`, {
         header: {
           "Content-Type": "application/json; charset=utf-8",
         },
@@ -142,7 +142,7 @@ const Hodhome = () => {
   const getTeachers3 = () => {
     let courseArray = [...courseTeachers3];
     courses3.map((course, index) => {
-      Axios.get(`http://10.25.100.17:8000/api/teacher/${course.teacher_id}`, {
+      Axios.get(`http://localhost:8000/api/teacher/${course.teacher_id}`, {
         header: {
           "Content-Type": "application/json; charset=utf-8",
         },
@@ -160,7 +160,7 @@ const Hodhome = () => {
   const getStudentCount3 = () => {
     let courseArray = [...studentCount3];
     courses3.map((course, index) => {
-      Axios.get(`http://10.25.100.17:8000/api/studentCount/${course._id}`, {
+      Axios.get(`http://localhost:8000/api/studentCount/${course._id}`, {
         header: {
           "Content-Type": "application/json; charset=utf-8",
         },
@@ -179,7 +179,7 @@ const Hodhome = () => {
   const getTeachers4 = () => {
     let courseArray = [...courseTeachers4];
     courses4.map((course, index) => {
-      Axios.get(`http://10.25.100.17:8000/api/teacher/${course.teacher_id}`, {
+      Axios.get(`http://localhost:8000/api/teacher/${course.teacher_id}`, {
         header: {
           "Content-Type": "application/json; charset=utf-8",
         },
@@ -197,7 +197,7 @@ const Hodhome = () => {
   const getStudentCount4 = () => {
     let courseArray = [...studentCount4];
     courses4.map((course, index) => {
-      Axios.get(`http://10.25.100.17:8000/api/studentCount/${course._id}`, {
+      Axios.get(`http://localhost:8000/api/studentCount/${course._id}`, {
         header: {
           "Content-Type": "application/json; charset=utf-8",
         },

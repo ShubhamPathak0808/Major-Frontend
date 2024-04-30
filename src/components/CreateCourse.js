@@ -89,7 +89,7 @@ const CreateCourse = (props) => {
       return toast.error("Please fill out required fields");
     }
 
-    Axios.post("http://10.25.100.17:8000/api/course", courseObject, {
+    Axios.post("http://localhost:8000/api/course", courseObject, {
       header: {
         "Content-Type": "application/json; charset=utf-8",
       },
@@ -129,7 +129,7 @@ const CreateCourse = (props) => {
     }
 
     let codeObject = { course_code: code };
-    Axios.post("http://10.25.100.17:8000/api/checkCourse", codeObject, {
+    Axios.post("http://localhost:8000/api/checkCourse", codeObject, {
       header: {
         "Content-Type": "application/json; charset=utf-8",
       },
@@ -138,7 +138,7 @@ const CreateCourse = (props) => {
         if (res.data.success) {
           let courseID = res.data.data._id;
           let recordObject = { student_id: _id, course_id: courseID };
-          Axios.post("http://10.25.100.17:8000/api/records", recordObject, {
+          Axios.post("http://localhost:8000/api/records", recordObject, {
             header: {
               "Content-Type": "application/json; charset=utf-8",
             },
