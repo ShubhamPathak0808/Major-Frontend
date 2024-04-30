@@ -23,12 +23,12 @@ let localdata = JSON.parse(localStorage.getItem("userDetails"));
 let user = localdata
   ? localdata
   : {
-      fName: "",
-      lName: "",
-      email: "",
-      password: "",
-      _id: "404",
-    };
+    fName: "",
+    lName: "",
+    email: "",
+    password: "",
+    _id: "404",
+  };
 
 export const generateExcelTotal = (attendences, courseStudents) => {
   const workbook = new exceljs.Workbook();
@@ -137,10 +137,9 @@ const generateExcel = (attendenceResults, courseID) => {
 
         const headerRow = worksheet.addRow([
           "Name",
-          `${
-            attendenceResults.length > 0
-              ? attendenceResults[0].date.substr(0, 10)
-              : ""
+          `${attendenceResults.length > 0
+            ? attendenceResults[0].date.substr(0, 10)
+            : ""
           }`,
         ]);
 
@@ -186,7 +185,7 @@ const generateExcel = (attendenceResults, courseID) => {
         });
       }
     })
-    .catch(() => {});
+    .catch(() => { });
 };
 
 // const generatePDF = (tickets) => {                           //check for generating pdf function
@@ -429,23 +428,26 @@ const Attendence = ({ history }) => {
           {/* <MyTimer endAttendence={endAttendence}/>                         new part to be added */}
           {/* Generate QR code */}
 
-          <div className="hero" style={{ textAlign: "center" }}>
+          <div className="hero container" style={{ textAlign: "center", marginTop:"100px" }}>
             <QRCode value={qr_url} style={{ textAlign: "center" }} />
 
             <div
-              className="changeColorBG"
+              className="changeColorBG col-lg-6"
               style={{
-				width:200,
                 height: 40,
                 borderRadius: 5,
                 display: "flex",
                 flexDirection: "row-reverse",
                 alignItems: "center",
-                marginTop: 10,
+                marginTop: 40,
                 overflow: "hidden",
                 paddingLeft: 10,
                 justifyContent: "space-between",
                 marginBottom: 0,
+                marginLeft: "auto",
+                marginRight: "auto",
+                paddingRight: "0"
+
               }}
             >
               <div

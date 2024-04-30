@@ -50,7 +50,7 @@ const QrScanner = () => {
 	};
 
 	return (
-		<div>
+		<div style={{textAlign:"center"}}>
 			<div id="reader"></div>
 			<button onClick={startScanner}>Scan QR code</button>
 		</div>

@@ -41,7 +41,7 @@ const StringScanner = () => {
 	};
 
 	return (
-		<div>
+		<div style={{textAlign:"center", marginTop:"30px"}}>
 			<div id="reader"></div>
             <input type="text" onChange={handleChange} />
 			<button onClick={submitString}>Enter</button>
