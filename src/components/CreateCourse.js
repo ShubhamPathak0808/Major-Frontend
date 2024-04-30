@@ -445,7 +445,7 @@ const CreateCourse = (props) => {
                     color="#434343"
                     onClick={() => {
                       navigator.clipboard.writeText(randomString);
-                      toast.info("Course code copied to clipboard");
+                      alert("Course code copied to clipboard");
                     }}
                   />
                 </div>

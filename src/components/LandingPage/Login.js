@@ -5,9 +5,10 @@ import Swal from "sweetalert2";
 import { toast } from "react-toastify";
 import md5 from "md5";
 import "../../App.css";
-import { ArrowLeft, Eye, EyeOff, Briefcase, Dribbble, Monitor } from "react-feather";
+import { Eye, EyeOff, Briefcase, Dribbble, Monitor } from "react-feather";
 import userImage from "../../assets/user4.png";
 import "./strong.css";
+import ArrowLeft from "../ArrowLeft";
 
 let randomUser = userImage;
 
@@ -414,12 +415,7 @@ const Login = ({
             // marginRight: "30px"
           }}
         >
-          <ArrowLeft
-            size={25}
-            color="#545454"
-            onClick={() => goBack()}
-            style={{ cursor: "pointer" }}
-          />
+          <ArrowLeft />
           <div
             style={{
               float: "right",

@@ -270,18 +270,39 @@ const Course = () => {
 			setDueDate(null);
 		}
 	};
-	const handleAttendenceDate = (day) => {
-		setAttendenceDate(day);
+	// const handleAttendenceDate = (day) => {
+	// 	setAttendenceDate(day);
+	// 	var q = new Date();
+	// 	var m = q.getMonth();
+	// 	var d = q.getDate();
+	// 	var y = q.getFullYear();
+	// 	var today = new Date(y, m, d);
+	// 	let ourDate = new Date(day);
+	// 	if (ourDate < today) {
+	// 		toast.error("Invalid date");
+	// 		setAttendenceDate(null);
+	// 	}
+	// };
+	const handleAttendenceDate = (day) => {                          /* updated by yash starts */
 		var q = new Date();
 		var m = q.getMonth();
 		var d = q.getDate();
 		var y = q.getFullYear();
 		var today = new Date(y, m, d);
 		let ourDate = new Date(day);
+		
 		if (ourDate < today) {
 			toast.error("Invalid date");
 			setAttendenceDate(null);
 		}
+
+		const date = new Date();
+		const options = { timeZone: 'Asia/Kolkata' };
+		const istDate = date.toLocaleString(undefined, options);
+
+		console.log(istDate);
+
+		setAttendenceDate(istDate);
 	};
 
 	// const [Duration, setDuration] = useState(0); //new added part

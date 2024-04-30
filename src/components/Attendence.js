@@ -341,6 +341,7 @@ const Attendence = ({ history }) => {
 		Axios.post("http://10.25.100.17:8000/api/submitAttendence", attendenceResponse)
 			.then((res) => {
 				if (res.data.success) {
+					alert("Attendance submitted successfully!!");
 				} else {
 					toast.error("You have already submitted this Attendence");
 				}
