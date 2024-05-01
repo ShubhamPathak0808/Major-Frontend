@@ -22,6 +22,9 @@ import niharika from './assets/niharika.jpg'
 import kirti from './assets/kirti.jpeg'
 import ayushi from './assets/ayushi.jpg'
 import gamad from './assets/gamad.jpg'
+import Arpita from './assets/Arpita.jpg'
+import Neha from './assets/Neha_Jadon.jpg'
+
 // import { baseUrl } from '../shared/baseUrl';
 // import {Stagger,Fade} from 'react-animation-components';
 
@@ -110,10 +113,10 @@ function About(props) {
             <CardBody className="buddy">
               <dl className="row p-1">
                 <dt className="col-12">
-                  <i class="fa fa-user"></i>:<a href="https://www.sgsits.ac.in/files/downloads/DKMishra.pdf"><b> Mr. Rajesh Khatri</b></a>
+                  <i class="fa fa-user"></i>:<a href="https://www.sgsits.ac.in/files/downloads/RajeshKhatri.pdf"><b> Mr. Rajesh Khatri</b></a>
                 </dt>
                 <dt className="col-12">
-                  <i class="fa fa-envelope"></i>:<a href="mailto:pbansod@sgsits.ac.in"> rajeshkhatri1@rediffmail.com</a>
+                  <i class="fa fa-envelope"></i>:<a href="mailto:rajeshkhatri1@rediffmail.com"> rajeshkhatri1@rediffmail.com</a>
                 </dt>
                 <dt className="col-12">
                   <i class="fa fa-phone"></i>:<a href="tel:091-731-2582421"> 091-731-2582425</a>
@@ -265,7 +268,7 @@ function About(props) {
 
               <div className="row">
                 <div className="col-lg-4 col-md-4 col-sm-12 col-xs-12" style={{ "textAlign": "center" }}>
-                  <a href="https://www.sgsits.ac.in/files/downloads/DKMishra.pdf">
+                  <a href="">
                     <Media
                       object
                       className="mr-2 fimage"
@@ -275,7 +278,7 @@ function About(props) {
                     /></a>
                 </div>
                 <div className="col-lg-8 col-md-8 col-sm-12 col-xs-12">
-                  <Media heading ><a href="https://www.sgsits.ac.in/files/downloads/DKMishra.pdf">Dr. R. S. Gamad</a></Media>
+                  <Media heading ><a href="">Dr. R. S. Gamad</a></Media>
                   <p>Designation: Professor</p>
                   <p>Employee ID: 3300293</p>
                   <p>Qualification:  Ph. D.</p>
@@ -796,23 +799,23 @@ function About(props) {
 
               <div className="row">
                 <div className="col-lg-4 col-md-4 col-sm-12 col-xs-12" style={{ "textAlign": "center" }}>
-                  <a href="https://www.sgsits.ac.in/index.php/eie-faculty-members/970-ayushi-choukikar">
+                  <a href="">
                     <Media
                       object
                       className="mr-2 fimage"
-                      src={ayushi}
+                      src={Arpita}
                       alt="Ms. Ayushi Choukikar"
                       style={{ "margin": "auto" }}
                     /></a>
                 </div>
                 <div className="col-lg-8 col-md-8 col-sm-12 col-xs-12">
-                  <Media heading><a href="https://www.sgsits.ac.in/index.php/eie-faculty-members/970-ayushi-choukikar">Ms. Ayushi Choukikar</a></Media>
+                  <Media heading><a href="">Ms. Arpita Kadel</a></Media>
                   <p>Designation: Assistant Professor</p>
-                  <p>Employee ID: 3305130</p>
+                  <p>Employee ID: 3305174</p>
                   <p>Qualification:  M.Tech</p>
-                  <p>Date of joining:  24/08/2022</p>
+                  <p>Date of joining:  01/08/2023</p>
                   <p><i class="fa fa-phone"></i> : <a href="tel:07312582423">  07312582423</a></p>
-                  <p><i class="fa fa-envelope"></i> : <a href="mailto:imayushi02@gmail.com"> imayushi02@gmail.com</a></p>
+                  <p><i class="fa fa-envelope"></i> : <a href="mailto: arpita.kadel88@gmail.com">  arpita.kadel88@gmail.com</a></p>
                   {/* <p>: <a href="mailto:gsoni[at]sgsits.ac.in">gsoni[at]sgsits.ac.in</a></p> */}
                   <p></p>
                 </div>
@@ -931,6 +934,36 @@ function About(props) {
                   <p>Date of joining:   24/08/2022</p>
                   <p><i class="fa fa-phone"></i> : <a href="tel: 07312582429">   07312582429</a></p>
                   <p><i class="fa fa-envelope"></i> : <a href="mailto:kirtirks@gmail.com">kirtirks@gmail.com</a></p>
+                  {/* <p>: <a href="mailto:gsoni[at]sgsits.ac.in">gsoni[at]sgsits.ac.in</a></p> */}
+                  <p></p>
+                </div>
+              </div>
+
+            </div>
+            {/* self card end */}
+
+            {/* self card start - shubham*/}
+            <div className="col col-lg-5 col-md-12 col-sm-12 col-xs-12 mt-5 teacherBox" >        {/* for the whole card */}
+
+              <div className="row">
+                <div className="col-lg-4 col-md-4 col-sm-12 col-xs-12" style={{ "textAlign": "center" }}>
+                  <a href="">
+                    <Media
+                      object
+                      className="mr-2 fimage"
+                      src={Neha}
+                      alt="Ms. Kirti Bhargava"
+                      style={{ "margin": "auto" }}
+                    /></a>
+                </div>
+                <div className="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+                  <Media heading><a href="">Ms. Neha Jadon</a></Media>
+                  <p>Designation: Assistant Professor</p>
+                  <p>Employee ID: </p>
+                  <p>Qualification:  M.E</p>
+                  <p>Date of joining:   14/02/2024</p>
+                  <p><i class="fa fa-phone"></i> : <a href="tel: 07312582429">   07312582423</a></p>
+                  <p><i class="fa fa-envelope"></i> : <a href=" nehajadon2345@gmail.com"> nehajadon2345@gmail.com</a></p>
                   {/* <p>: <a href="mailto:gsoni[at]sgsits.ac.in">gsoni[at]sgsits.ac.in</a></p> */}
                   <p></p>
                 </div>
