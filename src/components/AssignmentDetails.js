@@ -55,12 +55,12 @@ const AssignmentDetails = () => {
   };
 
   React.useEffect(() => {
-    Axios.get(`http://10.25.100.17:8000/api/assignment/${assignmentID}`)
+    Axios.get(`http://localhost:8000/api/assignment/${assignmentID}`)
       .then((res) => {
         let a = res.data.data;
         const course_id = a.course_id;
 
-        Axios.get(`http://10.25.100.17:8000/api/${course_id}`)
+        Axios.get(`http://localhost:8000/api/${course_id}`)
           .then((res) => {
             let a = res.data.data[0].count;
             setStudentCount(a);
@@ -80,11 +80,11 @@ const AssignmentDetails = () => {
   React.useEffect(() => {
     checkAttachment();
     if (userType === "student") checkHasSubmitted();
-    Axios.get(`http://10.25.100.17:8000/api/marks/${assignmentID}`)
+    Axios.get(`http://localhost:8000/api/marks/${assignmentID}`)
       .then((res) => {
         let a = res.data;
         console.log("courseId", courseId);
-        Axios.get(`http://10.25.100.17:8000/api/assignment/students/${assignmentID}`)
+        Axios.get(`http://localhost:8000/api/assignment/students/${assignmentID}`)
           .then((res) => {
             let students = res.data.data;
             let unsubmitted = students.filter((student) => {
@@ -113,7 +113,7 @@ const AssignmentDetails = () => {
     }
 
     Axios.post(
-      `http://10.25.100.17:8000/api/submission/grade/${assignmentID}/${currentStudent.student_id}`,
+      `http://localhost:8000/api/submission/grade/${assignmentID}/${currentStudent.student_id}`,
       {
         marks: marks,
       }
@@ -155,13 +155,13 @@ const AssignmentDetails = () => {
     if (submission.type !== "application/pdf") {
       return toast.error("Only PDF files are allowed");
     }
-    Axios.post(`http://10.25.100.17:8000/api/submission`, {
+    Axios.post(`http://localhost:8000/api/submission`, {
       assignment_id: assignmentID,
       student_id: user._id,
     })
       .then((res) => {
         Axios.post(
-          `http://10.25.100.17:8000/api/submission/attachment/${res.data.data._id}`,
+          `http://localhost:8000/api/submission/attachment/${res.data.data._id}`,
           formData,
           {
             headers: {
@@ -185,7 +185,7 @@ const AssignmentDetails = () => {
   };
 
   const checkAttachment = () => {
-    Axios.get(`http://10.25.100.17:8000/api/hasAttachment/${assignmentID}`)
+    Axios.get(`http://localhost:8000/api/hasAttachment/${assignmentID}`)
       .then((res) => {
         if (res.data.success) {
           setHasAttachment(res.data.file_exists);
@@ -197,7 +197,7 @@ const AssignmentDetails = () => {
   };
 
   const checkHasSubmitted = () => {
-    Axios.get(`http://10.25.100.17:8000/api/hasSubmitted/${assignmentID}/${user._id}`)
+    Axios.get(`http://localhost:8000/api/hasSubmitted/${assignmentID}/${user._id}`)
       .then((res) => {
         if (res.data.success) setHasSubmitted(true);
       })
@@ -308,7 +308,7 @@ const AssignmentDetails = () => {
             <reactFragment>
               <br />
               <a
-                href={`http://10.25.100.17:8000/api/assignment/attachment/${assignmentID}`}
+                href={`http://localhost:8000/api/assignment/attachment/${assignmentID}`}
                 target="_blank"
               >
                 <button
@@ -480,7 +480,7 @@ const AssignmentDetails = () => {
                           }}
                         >
                           <a
-                            href={`http://10.25.100.17:8000/api/submission/getAttachment/${assignmentID}/${item.student_id}`}
+                            href={`http://localhost:8000/api/submission/getAttachment/${assignmentID}/${item.student_id}`}
                             target="_blank"
                           >
                             <Download

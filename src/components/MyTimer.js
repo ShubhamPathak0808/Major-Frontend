@@ -31,7 +31,7 @@ const MyTimer = (props) => {                                     /* new added pa
     
         const fetchDuration = async () => {
           try {
-            const res = await Axios.get(`http://10.25.100.17:8000/api/attendence/${attendenceId}`);
+            const res = await Axios.get(`http://localhost:8000/api/attendence/${attendenceId}`);
             if (res.data.success) {
               setTimeLeft(res.data.data.duration);
               console.log(res.data.data.duration);
@@ -106,7 +106,7 @@ const MyTimer = ({ endAttendence }) => {
 
     const fetchDuration = async () => {
       try {
-        const res = await Axios.get(`http://10.25.100.17:8000/api/attendance/${attendenceId}`);
+        const res = await Axios.get(`http://localhost:8000/api/attendance/${attendenceId}`);
         if (res.data.success) {
           setTimeLeft(res.data.data.duration);
         }

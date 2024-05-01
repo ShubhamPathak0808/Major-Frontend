@@ -15,6 +15,7 @@
     "bootstrap": "^4.0.0",
     "bootstrap-social": "^5.1.1",
     "chart.js": "^2.9.4",
+    "clipboard-polyfill": "^4.1.0",
     "codemirror": "^5.65.16",
     "exceljs": "^4.4.0",
     "font-awesome": "^4.7.0",

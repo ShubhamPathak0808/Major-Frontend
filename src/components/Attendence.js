@@ -15,6 +15,7 @@ import QRCode from "react-qr-code"; //new added part
 
 import QrScanner from "./QrScanner"; //new added part
 import StringScanner from "./StringScanner";
+import * as clipboard from "clipboard-polyfill"
 
 import { ScannedContext } from "./contextAPI/ScannedContext"; //new added part
 
@@ -33,6 +34,7 @@ let user = localdata
 export const generateExcelTotal = (attendences, courseStudents) => {
   const workbook = new exceljs.Workbook();
   const worksheet = workbook.addWorksheet("Attendance");
+  console.log(attendences);
 
   courseStudents.sort((a, b) => {
     const nameA = (a.fName + a.lName).toUpperCase();
@@ -55,13 +57,13 @@ export const generateExcelTotal = (attendences, courseStudents) => {
     worksheet.addRow([name]);
   });
 
-  attendences.reverse();
+  //attendences.reverse();
 
   let promises = [];
 
   for (const item of attendences) {
     promises.push(
-      Axios.get(`http://10.25.100.17:8000/api/attendenceResult/${item._id}`)
+      Axios.get(`http://localhost:8000/api/attendenceResult/${item._id}`)
     );
   }
 
@@ -69,7 +71,7 @@ export const generateExcelTotal = (attendences, courseStudents) => {
     let ind = 0;
     for (const AttendanceResults of values) {
       if (AttendanceResults.status === "rejected") continue;
-      const newColumnHeader = attendences[ind].createdAt.substr(0, 10);
+      let newColumnHeader = attendences[ind].createdAt.substr(0, 10);
       ind++;
       let newColumnValues = [];
       courseStudents.forEach((ticket) => {
@@ -117,7 +119,7 @@ const generateExcel = (attendenceResults, courseID) => {
   const workbook = new exceljs.Workbook();
   const worksheet = workbook.addWorksheet("Attendance");
 
-  Axios.get(`http://10.25.100.17:8000/api/course/students/${courseID}`)
+  Axios.get(`http://localhost:8000/api/course/students/${courseID}`)
     .then((res) => {
       if (res.data.success) {
         let courseStudents = res.data.data;
@@ -236,7 +238,7 @@ const Attendence = ({ history }) => {
   const [courseID, setcourseID] = React.useState(0);
 
   const { qr, setqr } = useContext(qrContext);
-  const qr_url = `http://10.25.100.17/attendence/${qr}`; //new part added
+  const qr_url = `http://localhost/attendence/${qr}`; //new part added
   const encoded_url = btoa(qr_url);
 
   const { scan, setScan } = useContext(ScannedContext); //new part added
@@ -253,7 +255,7 @@ const Attendence = ({ history }) => {
     }
     let loc = window.location.href.split("/");
     let attendenceId = loc[loc.length - 1];
-    Axios.get(`http://10.25.100.17:8000/api/attendence/${attendenceId}`).then(
+    Axios.get(`http://localhost:8000/api/attendence/${attendenceId}`).then(
       (res) => {
         if (res.data.success) {
           // console.log(res.data.success);
@@ -270,7 +272,7 @@ const Attendence = ({ history }) => {
   React.useEffect(() => {
     let loc = window.location.href.split("/");
     let attendenceId = loc[loc.length - 1];
-    Axios.get(`http://10.25.100.17:8000/api/attendence/${attendenceId}`).then(
+    Axios.get(`http://localhost:8000/api/attendence/${attendenceId}`).then(
       (res) => {
         if (res.data.success) {
           setattendenceInfo(res.data.data);
@@ -286,7 +288,7 @@ const Attendence = ({ history }) => {
     let attendenceId = loc[loc.length - 1];
     if (userType === "student") {
       Axios.get(
-        `http://10.25.100.17:8000/api/attendence/hasSubmitted/${attendenceId}/${user._id}`
+        `http://localhost:8000/api/attendence/hasSubmitted/${attendenceId}/${user._id}`
       ).then((res) => {
         if (res.data.data) {
           setHasSubmitted(true);
@@ -301,7 +303,7 @@ const Attendence = ({ history }) => {
     let loc = window.location.href.split("/");
     let attendenceId = loc[loc.length - 1];
     Axios.get(
-      `http://10.25.100.17:8000/api/attendenceResult/${attendenceId}`
+      `http://localhost:8000/api/attendenceResult/${attendenceId}`
     ).then((res) => {
       if (res.data.success) {
         setAttendenceResults(res.data.data);
@@ -316,7 +318,7 @@ const Attendence = ({ history }) => {
 
   //   const fetchAttenanceResults = async () => {
   //     try {
-  //       const res = await Axios.get(`http://10.25.100.17:8000/api/attendenceResult/${attendenceId}`);
+  //       const res = await Axios.get(`http://localhost:8000/api/attendenceResult/${attendenceId}`);
   //       if (res.data.success) {
   //         setAttendenceResults(res.data.data);
   //       }
@@ -346,7 +348,7 @@ const Attendence = ({ history }) => {
         return toast.error("Attendence submission is closed");
       }
     }
-    Axios.post("http://10.25.100.17:8000/api/submitAttendence", attendenceResponse)
+    Axios.post("http://localhost:8000/api/submitAttendence", attendenceResponse)
       .then((res) => {
         if (res.data.success) {
           alert("Attendance submitted successfully!!");
@@ -363,7 +365,7 @@ const Attendence = ({ history }) => {
     let attendenceId = loc[loc.length - 1];
     forceUpdate();
     Axios.post(
-      `http://10.25.100.17:8000/api/startAttendence/${attendenceId}`
+      `http://localhost:8000/api/startAttendence/${attendenceId}`
     ).then((res) => {
       if (res.data.success) {
       }
@@ -375,7 +377,7 @@ const Attendence = ({ history }) => {
     let loc = window.location.href.split("/");
     let attendenceId = loc[loc.length - 1];
     forceUpdate();
-    Axios.post(`http://10.25.100.17:8000/api/endAttendence/${attendenceId}`).then(
+    Axios.post(`http://localhost:8000/api/endAttendence/${attendenceId}`).then(
       (res) => {
         if (res.data.success) {
         }
@@ -450,7 +452,7 @@ const Attendence = ({ history }) => {
 
               }}
             >
-              <div
+              <button
                 style={{
                   width: 40,
                   borderRadius: 0,
@@ -461,17 +463,20 @@ const Attendence = ({ history }) => {
                   alignItems: "center",
                   justifyContent: "center",
                   cursor: "pointer",
+	          zIndex: "1000",
                 }}
               >
                 <Copy
                   size={22}
                   color="#434343"
                   onClick={() => {
-                    navigator.clipboard.writeText(encoded_url);
-                    alert("Attendance string copied to clipboard");
+			clipboard.writeText(encoded_url).then(
+			() => {alert("Copied Successfully!"); },
+			() => {alert("error!"); }
+			);
                   }}
                 />
-              </div>
+              </button>
               <div style={{ width: "200px" }}>
                 <p
                   className="sub"

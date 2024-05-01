@@ -25,7 +25,7 @@ const SearchPage = ({}) => {
   const [isReady, setIsReady] = React.useState(false);
 
   React.useEffect(() => {
-    Axios.get(`http://10.25.100.17:8000/api/fetchCourse/teacher/${user._id}`)
+    Axios.get(`http://localhost:8000/api/fetchCourse/teacher/${user._id}`)
       .then((res) => {
         if (res.data.success) {
           let courses = res.data.data;
@@ -58,7 +58,7 @@ const SearchPage = ({}) => {
     setCourseStudents([]);
     let arr = [];
     course.map((course, index) => {
-      Axios.post(`http://10.25.100.17:8000/api/search/${course._id}`, { fName, lName })
+      Axios.post(`http://localhost:8000/api/search/${course._id}`, { fName, lName })
         .then((res) => {
           if (res.data.success) {
             res.data.data.forEach((t) => arr.push(t));
