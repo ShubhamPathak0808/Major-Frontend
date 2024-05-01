@@ -63,7 +63,7 @@ export const generateExcelTotal = (attendences, courseStudents) => {
 
   for (const item of attendences) {
     promises.push(
-      Axios.get(`http://localhost:8000/api/attendenceResult/${item._id}`)
+      Axios.get(`http://10.25.100.17:8000/api/attendenceResult/${item._id}`)
     );
   }
 
@@ -119,7 +119,7 @@ const generateExcel = (attendenceResults, courseID) => {
   const workbook = new exceljs.Workbook();
   const worksheet = workbook.addWorksheet("Attendance");
 
-  Axios.get(`http://localhost:8000/api/course/students/${courseID}`)
+  Axios.get(`http://10.25.100.17:8000/api/course/students/${courseID}`)
     .then((res) => {
       if (res.data.success) {
         let courseStudents = res.data.data;
@@ -238,7 +238,7 @@ const Attendence = ({ history }) => {
   const [courseID, setcourseID] = React.useState(0);
 
   const { qr, setqr } = useContext(qrContext);
-  const qr_url = `http://localhost/attendence/${qr}`; //new part added
+  const qr_url = `http://10.25.100.17/attendence/${qr}`; //new part added
   const encoded_url = btoa(qr_url);
 
   const { scan, setScan } = useContext(ScannedContext); //new part added
@@ -255,7 +255,7 @@ const Attendence = ({ history }) => {
     }
     let loc = window.location.href.split("/");
     let attendenceId = loc[loc.length - 1];
-    Axios.get(`http://localhost:8000/api/attendence/${attendenceId}`).then(
+    Axios.get(`http://10.25.100.17:8000/api/attendence/${attendenceId}`).then(
       (res) => {
         if (res.data.success) {
           // console.log(res.data.success);
@@ -272,7 +272,7 @@ const Attendence = ({ history }) => {
   React.useEffect(() => {
     let loc = window.location.href.split("/");
     let attendenceId = loc[loc.length - 1];
-    Axios.get(`http://localhost:8000/api/attendence/${attendenceId}`).then(
+    Axios.get(`http://10.25.100.17:8000/api/attendence/${attendenceId}`).then(
       (res) => {
         if (res.data.success) {
           setattendenceInfo(res.data.data);
@@ -288,7 +288,7 @@ const Attendence = ({ history }) => {
     let attendenceId = loc[loc.length - 1];
     if (userType === "student") {
       Axios.get(
-        `http://localhost:8000/api/attendence/hasSubmitted/${attendenceId}/${user._id}`
+        `http://10.25.100.17:8000/api/attendence/hasSubmitted/${attendenceId}/${user._id}`
       ).then((res) => {
         if (res.data.data) {
           setHasSubmitted(true);
@@ -303,7 +303,7 @@ const Attendence = ({ history }) => {
     let loc = window.location.href.split("/");
     let attendenceId = loc[loc.length - 1];
     Axios.get(
-      `http://localhost:8000/api/attendenceResult/${attendenceId}`
+      `http://10.25.100.17:8000/api/attendenceResult/${attendenceId}`
     ).then((res) => {
       if (res.data.success) {
         setAttendenceResults(res.data.data);
@@ -318,7 +318,7 @@ const Attendence = ({ history }) => {
 
   //   const fetchAttenanceResults = async () => {
   //     try {
-  //       const res = await Axios.get(`http://localhost:8000/api/attendenceResult/${attendenceId}`);
+  //       const res = await Axios.get(`http://10.25.100.17:8000/api/attendenceResult/${attendenceId}`);
   //       if (res.data.success) {
   //         setAttendenceResults(res.data.data);
   //       }
@@ -348,7 +348,7 @@ const Attendence = ({ history }) => {
         return toast.error("Attendence submission is closed");
       }
     }
-    Axios.post("http://localhost:8000/api/submitAttendence", attendenceResponse)
+    Axios.post("http://10.25.100.17:8000/api/submitAttendence", attendenceResponse)
       .then((res) => {
         if (res.data.success) {
           alert("Attendance submitted successfully!!");
@@ -365,7 +365,7 @@ const Attendence = ({ history }) => {
     let attendenceId = loc[loc.length - 1];
     forceUpdate();
     Axios.post(
-      `http://localhost:8000/api/startAttendence/${attendenceId}`
+      `http://10.25.100.17:8000/api/startAttendence/${attendenceId}`
     ).then((res) => {
       if (res.data.success) {
       }
@@ -377,7 +377,7 @@ const Attendence = ({ history }) => {
     let loc = window.location.href.split("/");
     let attendenceId = loc[loc.length - 1];
     forceUpdate();
-    Axios.post(`http://localhost:8000/api/endAttendence/${attendenceId}`).then(
+    Axios.post(`http://10.25.100.17:8000/api/endAttendence/${attendenceId}`).then(
       (res) => {
         if (res.data.success) {
         }

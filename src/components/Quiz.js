@@ -123,7 +123,7 @@ const Quiz = ({ history }) => {
   React.useEffect(() => {
     let loc = window.location.href.split("/");
     let quizid = loc[loc.length - 1];
-    Axios.get(`http://localhost:8000/api/quiz/${quizid}`).then((res) => {
+    Axios.get(`http://10.25.100.17:8000/api/quiz/${quizid}`).then((res) => {
       if (res.data.success) {
         setQuizInfo(res.data.data);
         setIsActive(res.data.data.is_active);
@@ -135,7 +135,7 @@ const Quiz = ({ history }) => {
     let loc = window.location.href.split("/");
     let quizid = loc[loc.length - 1];
     if (userType === "student") {
-      Axios.get(`http://localhost:8000/api/quiz/hasSubmitted/${quizid}/${user._id}`).then((res) => {
+      Axios.get(`http://10.25.100.17:8000/api/quiz/hasSubmitted/${quizid}/${user._id}`).then((res) => {
         if (res.data.data) {
           setHasSubmitted(true);
         }
@@ -147,7 +147,7 @@ const Quiz = ({ history }) => {
     window.scroll({ top: 0, left: 0, behavior: "smooth" });
     let loc = window.location.href.split("/");
     let quizid = loc[loc.length - 1];
-    Axios.get(`http://localhost:8000/api/quizResult/${quizid}`).then((res) => {
+    Axios.get(`http://10.25.100.17:8000/api/quizResult/${quizid}`).then((res) => {
       if (res.data.success) {
         setQuizResults(res.data.data);
       }
@@ -157,7 +157,7 @@ const Quiz = ({ history }) => {
   React.useEffect(() => {
     let loc = window.location.href.split("/");
     let quizid = loc[loc.length - 1];
-    Axios.get(`http://localhost:8000/api/questions/${quizid}`).then((res) => {
+    Axios.get(`http://10.25.100.17:8000/api/questions/${quizid}`).then((res) => {
       if (res.data.success) {
         let question = res.data.data;
         setQuestions(question);
@@ -901,7 +901,7 @@ const Quiz = ({ history }) => {
         return toast.error("Quiz submission is closed");
       }
     }
-    Axios.post("http://localhost:8000/api/submitQuiz", quizResponse)
+    Axios.post("http://10.25.100.17:8000/api/submitQuiz", quizResponse)
       .then((res) => {
         if (res.data.success) {
           openModalResult();
@@ -915,7 +915,7 @@ const Quiz = ({ history }) => {
   const startQuiz = () => {
     setIsActive(true);
     forceUpdate();
-    Axios.post(`http://localhost:8000/api/startQuiz/${quizInfo._id}`).then((res) => {
+    Axios.post(`http://10.25.100.17:8000/api/startQuiz/${quizInfo._id}`).then((res) => {
       if (res.data.success) {
       }
     });
@@ -924,7 +924,7 @@ const Quiz = ({ history }) => {
   const endQuiz = () => {
     setIsActive(false);
     forceUpdate();
-    Axios.post(`http://localhost:8000/api/endQuiz/${quizInfo._id}`).then((res) => {
+    Axios.post(`http://10.25.100.17:8000/api/endQuiz/${quizInfo._id}`).then((res) => {
       if (res.data.success) {
       }
     });
@@ -934,13 +934,13 @@ const Quiz = ({ history }) => {
     let loc = window.location.href.split("/");
     let quizID = loc[loc.length - 1];
     let courseId = "";
-    Axios.post(`http://localhost:8000/api/deleteQuiz/${quizID}`)
+    Axios.post(`http://10.25.100.17:8000/api/deleteQuiz/${quizID}`)
       .then((res) => {
         courseId = res.data.data.course_id;
         if (res.data.success) {
-          Axios.post(`http://localhost:8000/api/deleteQuestion/${quizID}`).then((res1) => {
+          Axios.post(`http://10.25.100.17:8000/api/deleteQuestion/${quizID}`).then((res1) => {
             if (res1.data.success) {
-              Axios.post(`http://localhost:8000/api/deleteSubmission/${quizID}`).then((res2) => {
+              Axios.post(`http://10.25.100.17:8000/api/deleteSubmission/${quizID}`).then((res2) => {
                 if (res2.data.success) {
                   toast.success("Deleted quiz successfully");
                   setTimeout(() => {
@@ -957,7 +957,7 @@ const Quiz = ({ history }) => {
 
   const renameQuiz = () => {
     let quizID = quizInfo._id;
-    Axios.post(`http://localhost:8000/api/quiz/changeName/${quizID}`, {
+    Axios.post(`http://10.25.100.17:8000/api/quiz/changeName/${quizID}`, {
       quiz_name: quizNewName,
     }).then((res) => {
       if (res.data.success) {

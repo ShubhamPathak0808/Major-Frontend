@@ -26,7 +26,7 @@ import {
 //   MDBCardImage,
 //   MDBBtn,
 // } from "mdb-react-ui-kit";
-const baseURL = "http://localhost:8000/";
+const baseURL = "http://10.25.100.17:8000/";
 // import Slide from "./Slide";
 let localdata = JSON.parse(localStorage.getItem("userDetails"));
 let userType = JSON.parse(localStorage.getItem("userType"));
@@ -53,7 +53,7 @@ class Application extends React.Component {
     this.props.history.push("/");
   }
   issue(id) {
-    fetch(`http://localhost:8000/issue/${id}`).then((error, res) => {
+    fetch(`http://10.25.100.17:8000/issue/${id}`).then((error, res) => {
       this.getArticles();
     });
   }
@@ -80,7 +80,7 @@ class Application extends React.Component {
       });
   }
   getTopIssued() {
-    fetch("http://localhost:8000/topissued")
+    fetch("http://10.25.100.17:8000/topissued")
       .then((response) => response.json())
       .then((res) =>
         res.data.map((article) => ({
@@ -203,7 +203,7 @@ class Application extends React.Component {
                         </Button>
                         <Button
                           className=" btn btn-new mt-4 btn-right1"
-                          href={`http://localhost:8000/download/${id}`}
+                          href={`http://10.25.100.17:8000/download/${id}`}
                           target="_blank"
                           // href = "https://www.google.com/"
                         >
